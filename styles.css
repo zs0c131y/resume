@@ -256,7 +256,7 @@ main {
 }
 
 .about__name {
-  color: black;
+  color: var(--clr-fg);;
 }
 .about__name:hover{
   color: red;
