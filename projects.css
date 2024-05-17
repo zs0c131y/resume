@@ -152,70 +152,70 @@ main {
   width: 0%;
 }
 
-.about {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 140vh;
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  font-family: "IBM Plex Sans", sans-serif;
-}
-
-.aboutxt {
-  font-family: "IBM Plex Sans", sans-serif;
-  font-size: 1.2em;
-  margin-bottom: 2em;
-}
-
-.skills-heading {
-  font-size: 48px;
-  margin-bottom: 30px;
-  width: 100%;
-  text-align: center;
-}
-
-.skills-container {
+.card-container {
   display: flex;
   flex-wrap: wrap;
-  align-items: center; /* Centers items horizontally */
-  gap: 20px; /* Space between the heading and the skills */
-  max-width: 100%;
-  text-align: center;
   justify-content: center;
-  margin-bottom: 50px;
-  margin: 0 3em;
-}
-
-.skill-row {
-  display: flex;
   gap: 20px;
 }
 
-.skill {
-  background-color: #333;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
+.card {
+  background-color: #151616;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 350px;
   text-align: center;
-  justify-content: center;
-  gap: 10px;
-  transition: transform 0.5s ease-in-out;
-  justify-content: center;
-  font-family: "IBM Plex Sans", sans-serif;
 }
 
-.skill i,
-.skill-icon {
-  font-size: 24px;
-  width: 24px;
-  height: 24px;
+.card-image {
+  width: 100%;
 }
 
-.skill:hover {
-  transform: scale(1.1);
+.card-content {
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.card-description {
+  color: #a0aec0;
+  margin-bottom: 20px;
+}
+
+.card-buttons {
+  margin-bottom: 20px;
+}
+
+.btn {
+  background-color: #4299e1;
+  color: white;
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn:hover {
+  background-color: #2b6cb0;
+}
+
+.card-tech-stack {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.tech {
+  background-color: #4a5568;
+  color: #e2e8f0;
+  padding: 5px 10px;
+  margin: 5px;
+  border-radius: 3px;
+  font-size: 0.9em;
 }

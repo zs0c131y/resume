@@ -127,7 +127,7 @@ main {
 }
 
 .link:hover {
-  color: orange;
+  color: white;
 }
 
 .link::before {
@@ -152,70 +152,90 @@ main {
   width: 0%;
 }
 
-.about {
+.contact {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 140vh;
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  font-family: "IBM Plex Sans", sans-serif;
+  height: 40vh;
 }
 
-.aboutxt {
-  font-family: "IBM Plex Sans", sans-serif;
-  font-size: 1.2em;
-  margin-bottom: 2em;
+.contact h2 {
+  margin-bottom: 1em;
 }
 
-.skills-heading {
-  font-size: 48px;
-  margin-bottom: 30px;
-  width: 100%;
-  text-align: center;
+.contact h2,
+h4 {
+  font-family: "Poppins", sans-serif;
 }
 
-.skills-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center; /* Centers items horizontally */
-  gap: 20px; /* Space between the heading and the skills */
-  max-width: 100%;
-  text-align: center;
-  justify-content: center;
-  margin-bottom: 50px;
-  margin: 0 3em;
-}
-
-.skill-row {
-  display: flex;
-  gap: 20px;
-}
-
-.skill {
-  background-color: #333;
-  padding: 10px 20px;
+.cspan {
+  border-bottom: 3px solid rgb(55, 55, 207);
   border-radius: 5px;
-  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+}
+
+.socials {
   display: flex;
-  align-items: center;
-  text-align: center;
+  gap: 3em;
+  margin-top: 10px;
   justify-content: center;
-  gap: 10px;
-  transition: transform 0.5s ease-in-out;
-  justify-content: center;
-  font-family: "IBM Plex Sans", sans-serif;
 }
 
-.skill i,
-.skill-icon {
-  font-size: 24px;
-  width: 24px;
-  height: 24px;
+.clink {
+  color: thistle;
+  font-family: "Poppins", sans-serif;
 }
 
-.skill:hover {
+.clink:hover {
+  color: rgb(255, 255, 255);
   transform: scale(1.1);
+}
+
+.clink {
+  text-transform: capitalize;
+  font-weight: 500;
+  margin: 0 0.4em;
+  align-items: center;
+  display: inline-block;
+  position: relative;
+}
+
+.clink::before {
+  content: "";
+  display: block;
+  width: 0%;
+  height: 0.2em;
+  position: absolute;
+  bottom: 0;
+  background-color: blueviolet;
+  transition: width 0.4s ease-in-out;
+  text-transform: capitalize;
+}
+
+.clink:hover::before,
+.clink:focus::before {
+  width: 100%;
+}
+
+.email {
+  display: flex;
+  justify-content: center;
+  margin-top: 5em;
+}
+
+.email h3 {
+  font-family: "Poppins", sans-serif;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+  color: white;
+}
+
+.footer p {
+  font-family: "Poppins", sans-serif;
 }
