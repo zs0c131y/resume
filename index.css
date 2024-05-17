@@ -11,6 +11,10 @@
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   font-family: "Inter", "Poppins", "IBM Plex Sans", sans-serif;
   line-height: 1.6;

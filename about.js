@@ -1,13 +1,27 @@
-let prevX = 0;
+document.addEventListener("DOMContentLoaded", () => {
+  const skillRows = document.querySelectorAll(".skill-row");
 
-const stack = document.querySelector(".stack");
+  skillRows.forEach((row, index) => {
+    let direction = index % 2 === 0 ? 1 : -1; // Alternate direction
+    let position = 0;
+    const speed = 0.5 * 1000; // Slower speed of movement in pixels per second
 
-stack.addEventListener("mousemove", function (e) {
-  if (e.clientX > prevX) {
-    this.scrollLeft += 30; // Scroll right if moving from left to right
-  } else {
-    this.scrollLeft -= 30; // Scroll left if moving from right to left
-  }
+    function moveSkills() {
+      position += (direction * speed) / 1000; // Convert speed to pixels per millisecond
+      row.style.transform = `translateX(${position}px)`;
 
-  prevX = e.clientX; // Update previous mouse position
+      const rowRect = row.getBoundingClientRect();
+      const containerRect = row.parentElement.getBoundingClientRect();
+
+      // Check if any part of the row is offscreen
+      if (
+        rowRect.left < containerRect.left ||
+        rowRect.right > containerRect.right
+      ) {
+        direction *= -1; // Reverse direction
+      }
+    }
+
+    setInterval(moveSkills, 20); // Move every 20 milliseconds
+  });
 });
