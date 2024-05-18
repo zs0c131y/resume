@@ -219,3 +219,68 @@ main {
 .skill:hover {
   transform: scale(1.1);
 }
+
+/* responsiveness */
+@media screen and (max-width: 768px) {
+  header {
+    width: 80%;
+    margin: 20px auto;
+  }
+
+  .about {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 230vh;
+    width: 90%;
+  }
+
+  .about h1 {
+    font-size: 2.5rem;
+  }
+
+  .aboutxt {
+    font-size: 1.2em;
+    margin-bottom: 2em;
+  }
+
+  .skills-heading {
+    font-size: 48px;
+    margin: 40px 0;
+  }
+
+  .skills-container {
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(100px, 1fr)
+    ); /* Three items per row */
+    gap: 15px;
+    margin: 0 1.5em;
+    justify-items: center;
+  }
+
+  .skill-row {
+    width: 100%;
+    display: contents; /* Make the row contents part of the grid */
+  }
+
+  .skill {
+    width: calc(100% - 1.2em);
+    max-width: 1000px; /* Ensure the skills fit nicely */
+    margin: 10px auto;
+    padding: 30px; /* Adjust padding to make the skills smaller */
+    font-size: 14px;
+    gap: 5px;
+    transition: none; /* Disable hover scaling on smaller screens */
+    text-align: center;
+  }
+
+  .skill i,
+  .skill-icon {
+    font-size: 30px;
+    width: 20px;
+    height: 20px;
+  }
+}

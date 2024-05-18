@@ -239,3 +239,35 @@ h4 {
 .footer p {
   font-family: "Poppins", sans-serif;
 }
+
+@media screen and (max-width: 768px) {
+  header {
+    width: 80%;
+    margin: 20px auto;
+  }
+
+  .contact h2 {
+    font-size: 1.7rem;
+    text-align: center;
+  }
+
+  .socials {
+    flex-wrap: wrap;
+    gap: 1em;
+  }
+
+  .email {
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .link {
+    text-align: center;
+    color: thistle;
+  }
+}

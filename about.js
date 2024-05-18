@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let isPaused = false; // To keep track of whether the movement is paused
 
     function moveSkills() {
-      if (!isPaused) {
+      if (window.innerWidth > 768 && !isPaused) {
+        // Only move if width is greater than 768px and not paused
         position += (direction * speed) / 1000; // Convert speed to pixels per millisecond
         row.style.transform = `translateX(${position}px)`;
 
@@ -22,6 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
         ) {
           direction *= -1; // Reverse direction
         }
+      } else if (window.innerWidth <= 768) {
+        // Reset position and transform for smaller screens
+        position = 0;
+        row.style.transform = `translateX(0)`;
       }
     }
 
