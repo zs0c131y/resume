@@ -246,9 +246,19 @@ h4 {
     margin: 20px auto;
   }
 
+  .contact {
+    height: 25vh;
+  }
+
   .contact h2 {
     font-size: 1.7rem;
     text-align: center;
+  }
+
+  .contact h4 {
+    font-size: 1.2rem;
+    text-align: center;
+    margin: 20px auto;
   }
 
   .socials {
@@ -259,11 +269,13 @@ h4 {
   .email {
     align-items: center;
     text-align: center;
+    margin: 60px auto;
   }
 
   .footer {
     flex-direction: column;
     text-align: center;
+    margin-top: 100px;
   }
 
   .link {
