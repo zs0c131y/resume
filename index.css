@@ -327,3 +327,131 @@ main {
     z-index: -1;
   }
 }
+
+/* responsiveness for 768-1024px */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  header {
+    width: 80%;
+    margin: 20px auto;
+  }
+
+  .home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 60vh; /* Adjusted height for larger screens */
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .home h1 {
+    font-size: 3rem;
+    margin-top: 5em; /* Adjusted margin for larger screens */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins", sans-serif;
+  }
+
+  .home h2 {
+    font-size: 2rem; /* Slightly larger font size for larger screens */
+    margin-top: 1em;
+    text-align: center;
+  }
+
+  .home p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%; /* Slightly narrower width for larger screens */
+    margin-bottom: 10px; /* Increased margin for spacing */
+    text-align: justify;
+  }
+
+  .resume {
+    font-weight: 800;
+    border-radius: 30px;
+    position: relative;
+    height: 3.5rem; /* Slightly larger button for larger screens */
+    width: 10rem; /* Slightly larger button for larger screens */
+    max-width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 3;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .resume::before {
+    content: "";
+    background: conic-gradient(transparent 270deg, white, transparent);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    aspect-ratio: 1;
+    width: 100%;
+    animation: rotate 2s linear infinite;
+    z-index: -1;
+  }
+
+  .resume::after {
+    content: "";
+    background: inherit;
+    border-radius: inherit;
+    position: absolute;
+    inset: 3px;
+    height: calc(100% - 6px);
+    width: calc(100% - 6px);
+    z-index: -1;
+  }
+
+  /* Skills Section */
+  .skills-heading {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  .skills-container {
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(150px, 1fr)
+    ); /* Three items per row */
+    gap: 20px;
+    margin: 0 2em;
+    justify-items: center;
+  }
+
+  .skill-row {
+    width: 100%;
+    display: contents; /* Make the row contents part of the grid */
+  }
+
+  .skill {
+    max-width: 150px; /* Ensure the skills fit nicely */
+    margin: 10px auto;
+    padding: 15px; /* Adjust padding for larger screens */
+    font-size: 16px;
+    gap: 10px;
+    transition: none; /* Disable hover scaling on smaller screens */
+    text-align: center;
+  }
+
+  .skill i,
+  .skill-icon {
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+  }
+}
