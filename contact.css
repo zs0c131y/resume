@@ -231,7 +231,7 @@ h4 {
 .footer {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: last baseline;
   height: 20vh;
   color: white;
 }
