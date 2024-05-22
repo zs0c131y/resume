@@ -251,12 +251,12 @@ main {
     flex-direction: column;
     align-items: center;
     height: 50vh;
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
   }
 
   .home h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin-top: 10em;
     display: flex;
     flex-direction: column;
@@ -271,6 +271,7 @@ main {
     align-items: center;
     justify-content: center;
     font-family: "Poppins", sans-serif;
+    font-size: 2.7rem;
   }
 
   .home h2 {
@@ -285,7 +286,7 @@ main {
     align-items: center;
     justify-content: center;
     width: 90%;
-    margin-bottom: 5px;
+    margin-bottom: px;
     text-align: justify;
   }
 
