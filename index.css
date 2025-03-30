@@ -130,7 +130,7 @@ body {
 
 /* Hero Section */
 .hero {
-  padding: 6rem 0 8rem;
+  padding: 3rem 0 4rem;
 }
 
 .hero-content {
@@ -145,6 +145,10 @@ body {
 }
 
 @media (min-width: 768px) {
+  .hero {
+    padding: 6rem 0 8rem;
+  }
+
   .hero h1 {
     font-size: 3.75rem;
   }
@@ -230,7 +234,7 @@ body {
 
 /* About Section */
 .about {
-  padding: 4rem 0;
+  padding: 2.5rem 0;
   background-color: hsla(var(--secondary), 0.1);
 }
 
@@ -246,6 +250,10 @@ body {
 }
 
 @media (min-width: 768px) {
+  .about {
+    padding: 4rem 0;
+  }
+
   .about-grid {
     grid-template-columns: 1fr 1fr;
     align-items: center;
@@ -277,7 +285,7 @@ body {
 
 /* Skills Section */
 .skills {
-  padding: 4rem 0;
+  padding: 2.5rem 0;
 }
 
 .skills h2 {
@@ -353,7 +361,7 @@ body {
 
 /* Projects Section */
 .projects {
-  padding: 4rem 0;
+  padding: 2.5rem 0;
   background-color: hsla(var(--secondary), 0.1);
 }
 
@@ -463,7 +471,7 @@ body {
 
 /* Contact Section */
 .contact {
-  padding: 4rem 0;
+  padding: 2.5rem 0;
 }
 
 .contact h2 {
@@ -503,6 +511,23 @@ body {
 /* Utilities */
 html {
   scroll-behavior: smooth;
+}
+
+/* Section spacing */
+.hero,
+.about,
+.skills,
+.projects {
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .hero,
+  .about,
+  .skills,
+  .projects {
+    margin-bottom: 0;
+  }
 }
 
 @media (max-width: 767px) {
@@ -555,6 +580,46 @@ html {
 
   .project-tags span {
     font-size: 0.7rem;
+  }
+
+  .hero {
+    padding: 2rem 0 3rem;
+  }
+
+  .about,
+  .skills,
+  .projects,
+  .contact {
+    padding: 2rem 0;
+  }
+
+  .about h2,
+  .skills h2,
+  .projects h2,
+  .contact h2 {
+    margin-bottom: 1.25rem;
+    font-size: 1.75rem;
+  }
+
+  .section-heading {
+    margin-bottom: 1rem;
+  }
+
+  .skills-grid,
+  .about-grid {
+    gap: 1.5rem;
+  }
+
+  .contact-info p {
+    margin-bottom: 1rem;
+  }
+
+  .project-content h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  .project-content p {
+    margin-bottom: 1rem;
   }
 }
 
@@ -616,6 +681,40 @@ html {
 
   .skill-icons {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+
+  .hero {
+    padding: 4rem 0 6rem;
+  }
+
+  .about,
+  .skills,
+  .projects,
+  .contact {
+    padding: 3.5rem 0;
+  }
+
+  .about h2,
+  .skills h2,
+  .projects h2,
+  .contact h2 {
+    margin-bottom: 2rem;
+  }
+
+  .skills-grid {
+    gap: 2.5rem;
+  }
+
+  .contact-info p {
+    margin-bottom: 1.5rem;
+  }
+
+  .project-content h3 {
+    margin-bottom: 0.75rem;
+  }
+
+  .project-content p {
+    margin-bottom: 1.5rem;
   }
 }
 
