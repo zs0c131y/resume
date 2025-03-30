@@ -67,17 +67,17 @@ body {
 .sticky-header {
   position: sticky;
   top: 0;
-  z-index: 10;
-  backdrop-filter: blur(8px);
-  background-color: hsla(var(--background), 0.8);
+  z-index: 50;
+  background-color: hsl(var(--background));
   border-bottom: 1px solid hsl(var(--border));
+  padding: 1rem 0;
 }
 
 .header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 4rem;
+  gap: 2rem;
 }
 
 .logo {
@@ -370,11 +370,16 @@ body {
   background-color: hsl(var(--card));
   border-radius: var(--radius);
   overflow: hidden;
-  transition: transform 0.2s;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  height: 100%;
 }
 
 .project-card:hover {
   transform: translateY(-4px);
+  border-color: hsl(263.4, 70%, 60%);
 }
 
 .project-card img {
@@ -385,30 +390,32 @@ body {
   transition: transform 0.3s ease;
 }
 
-.project-card:hover img {
-  transform: scale(1.02);
-}
-
 .project-content {
   padding: 1.5rem;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto auto;
+  height: 100%;
 }
 
 .project-content h3 {
   font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .project-content p {
   color: hsl(var(--muted-foreground));
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: justify;
 }
 
 .project-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid hsla(var(--secondary), 0.1);
+  align-self: end;
 }
 
 .project-tags span {
@@ -423,6 +430,9 @@ body {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
+  justify-content: flex-start;
+  border-top: 1px solid hsla(var(--secondary), 0.1);
+  padding-top: 1rem;
 }
 
 .project-link {

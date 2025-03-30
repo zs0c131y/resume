@@ -72,6 +72,7 @@ header {
   margin-right: auto;
   margin-top: 20px;
   position: relative;
+  z-index: 50;
 }
 
 header nav {
@@ -165,7 +166,16 @@ main {
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   max-width: 350px;
-  text-align: center;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  height: 100%;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: hsl(263.4, 70%, 60%);
 }
 
 .card-image {
@@ -174,20 +184,47 @@ main {
 
 .card-content {
   padding: 20px;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto auto;
+  height: 100%;
 }
 
 .card-title {
   font-size: 1.5em;
-  margin-bottom: 10px;
+  margin-bottom: 0.75rem;
+  text-align: left;
 }
 
 .card-description {
   color: #a0aec0;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
+  text-align: justify;
+}
+
+.card-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  align-self: end;
+}
+
+.tech {
+  background-color: #4a5568;
+  color: #e2e8f0;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 0.9em;
 }
 
 .card-buttons {
-  margin-bottom: 20px;
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1rem;
 }
 
 .btn {
@@ -203,21 +240,6 @@ main {
 
 .btn:hover {
   background-color: #2b6cb0;
-}
-
-.card-tech-stack {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.tech {
-  background-color: #4a5568;
-  color: #e2e8f0;
-  padding: 5px 10px;
-  margin: 5px;
-  border-radius: 3px;
-  font-size: 0.9em;
 }
 
 @media screen and (max-width: 768px) {
