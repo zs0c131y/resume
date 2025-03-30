@@ -186,6 +186,7 @@ body {
   font-size: 1.25rem;
   color: hsl(var(--muted-foreground));
   margin: 1rem 0;
+  text-align: justify;
 }
 
 @media (min-width: 768px) {
