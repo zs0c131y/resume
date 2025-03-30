@@ -281,6 +281,7 @@ body {
 
 .about-content p {
   color: hsl(var(--muted-foreground));
+  text-align: justify;
 }
 
 /* Skills Section */
@@ -487,6 +488,7 @@ body {
 .contact-info p {
   color: hsl(var(--muted-foreground));
   margin-bottom: 1.5rem;
+  text-align: justify;
 }
 
 .contact-links {
