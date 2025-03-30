@@ -503,3 +503,193 @@ html {
     padding: 0 1rem;
   }
 }
+
+/* Responsive Design System */
+/* Extra small devices (phones, 320px and up) */
+@media screen and (min-width: 320px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero-text {
+    font-size: 1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .main-nav {
+    display: none;
+  }
+
+  .project-content {
+    padding: 1rem;
+  }
+
+  .project-tags {
+    gap: 0.35rem;
+  }
+
+  .project-tags span {
+    font-size: 0.7rem;
+  }
+}
+
+/* Small devices (larger phones, 375px and up) */
+@media screen and (min-width: 375px) {
+  .hero h1 {
+    font-size: 2.25rem;
+  }
+
+  .hero-text {
+    font-size: 1.1rem;
+  }
+
+  .project-tags span {
+    font-size: 0.75rem;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media screen and (min-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+  }
+
+  .hero-text {
+    font-size: 1.25rem;
+  }
+
+  .hero-buttons {
+    flex-direction: row;
+    width: auto;
+  }
+
+  .button {
+    width: auto;
+  }
+
+  .main-nav {
+    display: flex;
+  }
+
+  .project-content {
+    padding: 1.5rem;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .skill-icons {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
+
+/* Large devices (laptops/desktops, 1024px and up) */
+@media screen and (min-width: 1024px) {
+  .container {
+    padding: 0 2rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .hero h1 {
+    font-size: 3.75rem;
+  }
+
+  .hero-text {
+    font-size: 1.5rem;
+  }
+
+  .skill-icons {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+/* Extra large devices (large desktops, 1440px and up) */
+@media screen and (min-width: 1440px) {
+  .container {
+    max-width: 1400px;
+    padding: 0 3rem;
+  }
+
+  .projects-grid {
+    gap: 2.5rem;
+  }
+
+  .project-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* 4K and ultra-wide screens (2560px and up) */
+@media screen and (min-width: 2560px) {
+  .container {
+    max-width: 2400px;
+    padding: 0 4rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+  }
+
+  .hero h1 {
+    font-size: 4.5rem;
+  }
+
+  .hero-text {
+    font-size: 1.75rem;
+  }
+
+  .project-content {
+    padding: 2rem;
+  }
+}
+
+/* Ensure proper spacing on ultra-wide screens */
+@media screen and (min-width: 3440px) {
+  .container {
+    max-width: 3200px;
+    padding: 0 6rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
