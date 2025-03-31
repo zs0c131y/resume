@@ -13,7 +13,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="index.css" />
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Fixed Lucide script import with HTTPS -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
     <link rel="icon" href="img/favicon.png" type="image/png" />
   </head>
   <body class="dark">
@@ -299,14 +300,16 @@
                     href="https://github.com/zs0c131y/blossoms"
                     class="project-link"
                   >
-                    <lucide-icon name="github"></lucide-icon>
+                    <!-- Fixed: replaced lucide-icon with i data-lucide -->
+                    <i data-lucide="github"></i>
                     GitHub
                   </a>
                   <a
                     href="https://blossomsbyc.netlify.app"
                     class="project-link"
                   >
-                    <lucide-icon name="external-link"></lucide-icon>
+                    <!-- Fixed: replaced lucide-icon with i data-lucide -->
+                    <i data-lucide="external-link"></i>
                     Live
                   </a>
                 </div>
