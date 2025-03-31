@@ -403,6 +403,13 @@ body {
   transition: transform 0.3s ease;
 }
 
+.project-card img[src*="blossoms.png"] {
+  width: 100%;
+  object-fit: contain; /* This ensures the whole image is visible without cropping */
+  background-color: #000; /* Black background to match the space theme */
+  aspect-ratio: auto; /* Override the default aspect ratio */
+}
+
 .project-content {
   padding: 1.5rem;
   display: grid;
