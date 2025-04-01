@@ -249,6 +249,24 @@ body {
   gap: 3rem;
 }
 
+.about-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+@media screen and (max-width: 767px) {
+  .about-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .about-buttons .button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
 @media (min-width: 768px) {
   .about {
     padding: 4rem 0;
