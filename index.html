@@ -414,6 +414,106 @@
       // Initialize Lucide icons
       lucide.createIcons();
 
+      // Function to log a stylish message to the console - Easter Egg
+      function addConsoleEasterEgg() {
+        // Title styles
+        const titleStyles = [
+          "font-size: 24px",
+          "font-family: 'Inter', system-ui, sans-serif",
+          "background: linear-gradient(45deg, #FF6B6B, #4ECDC4)",
+          "color: white",
+          "padding: 15px 25px",
+          "border-radius: 12px",
+          "font-weight: 600",
+          "text-shadow: 2px 2px 4px rgba(0,0,0,0.2)",
+          "margin: 5px 0",
+        ].join(";");
+
+        // Heading styles for sections
+        const headingStyles = [
+          "font-size: 16px",
+          "font-family: 'Inter', system-ui, sans-serif",
+          "color: #4ECDC4",
+          "font-weight: 600",
+          "margin: 10px 0",
+          "text-transform: uppercase",
+          "letter-spacing: 0.5px",
+        ].join(";");
+
+        // Text styles for regular content
+        const textStyles = [
+          "font-size: 14px",
+          "font-family: 'Inter', system-ui, sans-serif",
+          "color: #E0E0E0",
+          "line-height: 1.5",
+          "padding: 4px 0",
+        ].join(";");
+
+        // Easter egg styles
+        const easterEggStyles = [
+          "font-size: 14px",
+          "font-family: 'Inter', system-ui, sans-serif",
+          "color: #FFFFFF",
+          "background: linear-gradient(45deg, rgba(78, 205, 196, 0.1), rgba(255, 107, 107, 0.1))",
+          "padding: 12px 16px",
+          "border-radius: 8px",
+          "border: 1px solid rgba(78, 205, 196, 0.3)",
+          "margin: 8px 0",
+          "text-shadow: 0 1px 1px rgba(0,0,0,0.1)",
+        ].join(";");
+
+        // Contact styles
+        const contactStyles = [
+          "font-size: 15px",
+          "font-family: 'Inter', system-ui, sans-serif",
+          "background: linear-gradient(45deg, #4ECDC4, #FF6B6B)",
+          "color: white",
+          "padding: 12px 20px",
+          "border-radius: 8px",
+          "font-weight: 500",
+          "margin: 10px 0",
+          "text-shadow: 0 1px 2px rgba(0,0,0,0.2)",
+          "border: 1px solid rgba(255,255,255,0.1)",
+        ].join(";");
+
+        // Separator style
+        const separatorStyles = [
+          "font-size: 14px",
+          "color: #4ECDC4",
+          "margin: 15px 0",
+          "opacity: 0.5",
+        ].join(";");
+
+        // Console output with new styling
+        console.log("%c👋 Hello, fellow developer!", titleStyles);
+
+        console.log("%c%s", separatorStyles, "━".repeat(50));
+
+        console.log("%cWelcome to My Portfolio", headingStyles);
+        console.log(
+          "%cThanks for checking out my work! I'm passionate about creating beautiful and functional web experiences.",
+          textStyles
+        );
+
+        console.log("%c%s", separatorStyles, "━".repeat(50));
+
+        console.log("%c🎮 Easter Eggs", headingStyles);
+        console.log("%c↑↑↓↓←→←→BA - Try the Konami Code", easterEggStyles);
+        console.log(
+          "%c🖱️ Click the {AG} logo 5 times rapidly",
+          easterEggStyles
+        );
+        console.log("%c💻 Type matrix() in the console", easterEggStyles);
+
+        console.log("%c%s", separatorStyles, "━".repeat(50));
+
+        console.log("%c📬 Let's Connect!", headingStyles);
+        console.log(
+          "%c💼 Looking to hire? Contact me at gupthadarsh@gmail.com",
+          contactStyles
+        );
+      }
+
       // Add this to your existing script at the end of the body
       document.addEventListener("DOMContentLoaded", () => {
         const themeToggle = document.getElementById("theme-toggle");
@@ -435,7 +535,280 @@
             : "light";
           localStorage.setItem("theme", currentTheme);
         });
+
+        // Track clicks on the logo - Easter Egg
+        let logoClickCount = 0;
+        let logoClickTimer;
+
+        // Get the logo element
+        const logo = document.querySelector(".logo");
+
+        // Add click event listener to the logo
+        logo.addEventListener("click", function (e) {
+          // Prevent default navigation if this is an anchor element
+          e.preventDefault();
+
+          // Increment the click counter
+          logoClickCount++;
+
+          // Clear the previous timer
+          clearTimeout(logoClickTimer);
+
+          // Set a new timer to reset the counter after 2 seconds
+          logoClickTimer = setTimeout(() => {
+            // If there were 5 or more clicks, activate the easter egg
+            if (logoClickCount >= 5) {
+              activateLogoEasterEgg();
+            }
+            // Reset the counter
+            logoClickCount = 0;
+          }, 2000);
+        });
+
+        function activateLogoEasterEgg() {
+          // Get the logo element
+          const logo = document.querySelector(".logo");
+
+          // Store the original text
+          const originalText = logo.textContent;
+
+          // Array of fun texts to cycle through
+          const funTexts = [
+            "🚀 {AG}",
+            "✨ {AG}",
+            "{🔥G}",
+            "{A🔥}",
+            "{💻G}",
+            "{A🎮}",
+            "{⚡G}",
+          ];
+
+          // Counter for the animation
+          let animationCounter = 0;
+
+          // Start the animation
+          const animationInterval = setInterval(() => {
+            // Update the logo text
+            logo.textContent = funTexts[animationCounter % funTexts.length];
+
+            // Increment the counter
+            animationCounter++;
+
+            // Stop the animation after cycling through all options
+            if (animationCounter >= funTexts.length) {
+              clearInterval(animationInterval);
+
+              // Reset to the original text after 2 seconds
+              setTimeout(() => {
+                logo.textContent = originalText;
+              }, 2000);
+            }
+          }, 200);
+        }
+
+        // Konami Code sequence - Easter Egg
+        const konamiCode = [
+          "ArrowUp",
+          "ArrowUp",
+          "ArrowDown",
+          "ArrowDown",
+          "ArrowLeft",
+          "ArrowRight",
+          "ArrowLeft",
+          "ArrowRight",
+          "b",
+          "a",
+        ];
+
+        // Track the sequence entered
+        let konamiCodePosition = 0;
+
+        // Add event listener to document for keyboard inputs
+        document.addEventListener("keydown", function (e) {
+          // Get the key that was pressed
+          const key = e.key;
+
+          // Check if the key matches the expected key in the sequence
+          const requiredKey = konamiCode[konamiCodePosition];
+
+          if (key === requiredKey) {
+            // If correct, move to the next position in the sequence
+            konamiCodePosition++;
+
+            // If the entire sequence is entered correctly
+            if (konamiCodePosition === konamiCode.length) {
+              // Reset the sequence tracker
+              konamiCodePosition = 0;
+              // Activate the easter egg
+              activateKonamiEasterEgg();
+            }
+          } else {
+            // If incorrect, reset the sequence tracker
+            konamiCodePosition = 0;
+          }
+        });
+
+        function activateKonamiEasterEgg() {
+          // Create a container for the animation
+          const eggContainer = document.createElement("div");
+          eggContainer.style.position = "fixed";
+          eggContainer.style.top = "0";
+          eggContainer.style.left = "0";
+          eggContainer.style.width = "100%";
+          eggContainer.style.height = "100%";
+          eggContainer.style.zIndex = "9999";
+          eggContainer.style.pointerEvents = "none";
+          eggContainer.style.overflow = "hidden";
+
+          // Add 30 small colored divs that will float around
+          for (let i = 0; i < 30; i++) {
+            const element = document.createElement("div");
+            element.className = "konami-element";
+
+            // Random positions, colors, and sizes
+            const size = Math.floor(Math.random() * 40) + 20;
+            element.style.position = "absolute";
+            element.style.width = `${size}px`;
+            element.style.height = `${size}px`;
+            element.style.left = `${Math.random() * 100}%`;
+            element.style.top = `${Math.random() * 100}%`;
+            element.style.borderRadius = "50%";
+            element.style.backgroundColor = `hsl(${
+              Math.random() * 360
+            }, 80%, 60%)`;
+            element.style.opacity = "0.8";
+            element.style.boxShadow = "0 0 10px rgba(255,255,255,0.5)";
+            element.style.transition = "transform 1s ease-out";
+
+            // Add animation
+            setTimeout(() => {
+              element.style.transform = `translate(${
+                (Math.random() - 0.5) * 500
+              }px, ${(Math.random() - 0.5) * 500}px) rotate(${
+                Math.random() * 360
+              }deg)`;
+            }, 10);
+
+            eggContainer.appendChild(element);
+          }
+
+          // Add a welcome message
+          const message = document.createElement("div");
+          message.textContent = "Konami Code Activated! 🎮";
+          message.style.position = "absolute";
+          message.style.top = "50%";
+          message.style.left = "50%";
+          message.style.transform = "translate(-50%, -50%)";
+          message.style.fontSize = "2rem";
+          message.style.color = "white";
+          message.style.fontWeight = "bold";
+          message.style.textShadow = "0 0 10px rgba(0,0,0,0.7)";
+          message.style.padding = "1rem";
+          message.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+          message.style.borderRadius = "10px";
+          message.style.zIndex = "10000";
+
+          eggContainer.appendChild(message);
+          document.body.appendChild(eggContainer);
+
+          // Remove the animation after 4 seconds
+          setTimeout(() => {
+            document.body.removeChild(eggContainer);
+          }, 4000);
+        }
+
+        // Define the matrix function in the global scope
+        window.matrix = function () {
+          console.log(
+            "%cInitiating the Matrix...",
+            "color: #00FF00; font-family: monospace; font-size: 16px;"
+          );
+
+          // Create the matrix effect
+          const canvas = document.createElement("canvas");
+          const context = canvas.getContext("2d");
+          canvas.style.position = "fixed";
+          canvas.style.top = "0";
+          canvas.style.left = "0";
+          canvas.style.width = "100%";
+          canvas.style.height = "100%";
+          canvas.style.zIndex = "9999";
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          document.body.appendChild(canvas);
+
+          let chars = "ADARSHGUPTAJAVASCRIPTPYTHONHTMLCSSKUNG0123456789";
+          chars = chars.split("");
+
+          const fontSize = 14;
+          const columns = canvas.width / fontSize;
+
+          // Create an array of drops representing where each column starts at
+          const drops = [];
+          for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+          }
+
+          function draw() {
+            // Set a translucent background to create the fade effect
+            context.fillStyle = "rgba(0, 0, 0, 0.05)";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Set the color and font of the characters
+            context.fillStyle = "#0F0";
+            context.font = fontSize + "px monospace";
+
+            // Draw the characters
+            for (let i = 0; i < drops.length; i++) {
+              // Get a random character
+              const text = chars[Math.floor(Math.random() * chars.length)];
+
+              // Draw the character
+              context.fillText(text, i * fontSize, drops[i] * fontSize);
+
+              // Reset the drop if it's reached the bottom of the screen or randomly
+              if (
+                drops[i] * fontSize > canvas.height &&
+                Math.random() > 0.975
+              ) {
+                drops[i] = 0;
+              }
+
+              // Move the drop down
+              drops[i]++;
+            }
+          }
+
+          // Run the animation at 35 FPS
+          const matrixInterval = setInterval(draw, 35);
+
+          // Create a close button
+          const closeButton = document.createElement("button");
+          closeButton.textContent = "Exit Matrix";
+          closeButton.style.position = "fixed";
+          closeButton.style.bottom = "20px";
+          closeButton.style.right = "20px";
+          closeButton.style.zIndex = "10000";
+          closeButton.style.padding = "10px 20px";
+          closeButton.style.backgroundColor = "#111";
+          closeButton.style.color = "#0F0";
+          closeButton.style.border = "1px solid #0F0";
+          closeButton.style.borderRadius = "5px";
+          closeButton.style.fontFamily = "monospace";
+          closeButton.style.cursor = "pointer";
+          document.body.appendChild(closeButton);
+
+          // Add event listener to close button
+          closeButton.addEventListener("click", () => {
+            clearInterval(matrixInterval);
+            document.body.removeChild(canvas);
+            document.body.removeChild(closeButton);
+          });
+        };
       });
+
+      // Call the function when the page is fully loaded
+      document.addEventListener("DOMContentLoaded", addConsoleEasterEgg);
     </script>
   </body>
 </html>
