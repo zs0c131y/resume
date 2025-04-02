@@ -22,6 +22,159 @@
   --radius: 0.5rem;
 }
 
+/* Light mode specific styles */
+body:not(.dark) {
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+  --primary: 348 83% 47%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 240 4.8% 95.9%;
+  --secondary-foreground: 240 5.9% 10%;
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 46.1%;
+  --accent: 240 4.8% 95.9%;
+  --accent-foreground: 240 5.9% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --ring: 348 83% 47%;
+}
+
+/* Light mode specific component styles */
+body:not(.dark) .badge {
+  background-color: rgba(240, 240, 245, 0.8);
+  border: 1px solid rgba(200, 200, 210, 0.8);
+  color: hsl(var(--foreground));
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body:not(.dark) .badge i {
+  color: hsl(var(--primary));
+}
+
+body:not(.dark) .skill-icon {
+  background-color: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+body:not(.dark) .skill-icon:hover {
+  border-color: hsl(var(--primary));
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+body:not(.dark) .project-card {
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+body:not(.dark) .project-card:hover {
+  border-color: hsl(var(--primary));
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+body:not(.dark) .project-tags span {
+  background-color: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--foreground));
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+body:not(.dark) .about,
+body:not(.dark) .projects {
+  background-color: hsl(var(--secondary));
+}
+
+body:not(.dark) .theme-toggle {
+  border-color: hsl(var(--border));
+  color: hsl(var(--foreground));
+}
+
+body:not(.dark) .theme-toggle:hover {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+body:not(.dark) .contact-button {
+  border-color: hsl(var(--border));
+  color: hsl(var(--foreground));
+}
+
+body:not(.dark) .contact-button:hover {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+body:not(.dark) .button.secondary {
+  border-color: hsl(var(--border));
+  color: hsl(var(--foreground));
+}
+
+body:not(.dark) .button.secondary:hover {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+body:not(.dark) .project-link {
+  color: hsl(var(--primary));
+}
+
+body:not(.dark) .project-link:hover {
+  color: hsl(var(--primary) / 0.8);
+}
+
+body:not(.dark) .contact-link {
+  color: hsl(var(--muted-foreground));
+}
+
+body:not(.dark) .contact-link:hover {
+  color: hsl(var(--foreground));
+}
+
+/* Add hover effects for about section buttons in light mode */
+body:not(.dark) .about-buttons .button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+body:not(.dark) .about-buttons .button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+body:not(.dark) .about-buttons .button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: hsl(var(--primary));
+  color: hsl(var(--primary));
+}
+
+body:not(.dark) .about-buttons .button:hover::before {
+  left: 100%;
+}
+
+body:not(.dark) .about-buttons .button:active {
+  transform: translateY(0);
+}
+
 .dark {
   --background: 240 10% 3.9%;
   --foreground: 0 0% 98%;
@@ -92,6 +245,54 @@ body {
   gap: 1.5rem;
 }
 
+/* Theme toggle styles */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--foreground));
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-right: 0.5rem;
+}
+
+.theme-toggle:hover {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.theme-toggle-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Show/hide icons based on current theme */
+.dark .light-icon {
+  display: block;
+}
+
+.dark .dark-icon {
+  display: none;
+}
+
+body:not(.dark) .light-icon {
+  display: none;
+}
+
+body:not(.dark) .dark-icon {
+  display: block;
+}
+
+/* Smooth transition between themes */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 @media (min-width: 768px) {
   .main-nav {
     display: flex;
@@ -126,6 +327,13 @@ body {
 .contact-button:hover {
   background-color: hsl(var(--accent));
   color: hsl(var(--accent-foreground));
+}
+
+/* Add new styles for the right side buttons container */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 /* Hero Section */
@@ -172,7 +380,7 @@ body {
   padding: 0.375rem 1rem;
   border-radius: 9999px;
   background-color: rgba(30, 30, 35, 0);
-  border: 1px solid rgba(100, 100, 110, 0);
+  border: 1px solid rgba(100, 100, 110, 0.8);
   font-size: 0.875rem;
   color: white;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
