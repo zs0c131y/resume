@@ -9,9 +9,9 @@
   --primary: 348 83% 47%;
   --primary-foreground: 210 40% 98%;
   --secondary: 240 4.8% 95.9%;
-  --secondary-foreground: 240 5.9% 10%;
+  --secondary-foreground: 240 5.9% 8%; /* Increased contrast from 10% to 8% */
   --muted: 240 4.8% 95.9%;
-  --muted-foreground: 240 3.8% 46.1%;
+  --muted-foreground: 240 3.8% 40%; /* Increased contrast from 46.1% to 40% */
   --accent: 240 4.8% 95.9%;
   --accent-foreground: 240 5.9% 10%;
   --destructive: 0 84.2% 60.2%;
@@ -33,9 +33,9 @@ body:not(.dark) {
   --primary: 348 83% 47%;
   --primary-foreground: 210 40% 98%;
   --secondary: 240 4.8% 95.9%;
-  --secondary-foreground: 240 5.9% 10%;
+  --secondary-foreground: 240 5.9% 8%; /* Increased contrast from 10% to 8% */
   --muted: 240 4.8% 95.9%;
-  --muted-foreground: 240 3.8% 46.1%;
+  --muted-foreground: 240 3.8% 40%; /* Increased contrast from 46.1% to 40% */
   --accent: 240 4.8% 95.9%;
   --accent-foreground: 240 5.9% 10%;
   --destructive: 0 84.2% 60.2%;
@@ -74,15 +74,16 @@ body:not(.dark) .project-card {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-body:not(.dark) .project-card:hover {
+body:not(.dark) .project-card:hover,
+body:not(.dark) .project-card:focus-within {
   border-color: hsl(var(--primary));
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 body:not(.dark) .project-tags span {
-  background-color: hsl(var(--background));
+  background-color: hsl(var(--accent));
   border: 1px solid hsl(var(--border));
-  color: hsl(var(--foreground));
+  color: hsl(var(--accent-foreground));
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
@@ -182,19 +183,19 @@ body:not(.dark) .about-buttons .button:active {
   --card-foreground: 0 0% 98%;
   --popover: 240 10% 3.9%;
   --popover-foreground: 0 0% 98%;
-  --primary: 0 100% 65%;
+  --primary: 0 100% 70%; /* Improved contrast from 65% to 70% */
   --primary-foreground: 210 40% 98%;
   --secondary: 240 3.7% 15.9%;
   --secondary-foreground: 0 0% 98%;
   --muted: 240 3.7% 15.9%;
-  --muted-foreground: 240 5% 64.9%;
+  --muted-foreground: 240 5% 70%; /* Improved contrast from 64.9% to 70% */
   --accent: 240 3.7% 15.9%;
   --accent-foreground: 0 0% 98%;
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
   --border: 240 3.7% 15.9%;
   --input: 240 3.7% 15.9%;
-  --ring: 0 100% 65%;
+  --ring: 0 100% 70%; /* Improved contrast from 65% to 70% */
 }
 
 * {
@@ -208,6 +209,32 @@ body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
   line-height: 1.6;
+}
+
+/* Focus styles for accessibility */
+:focus {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+.dark :focus {
+  outline-color: hsl(var(--primary) / 0.8);
+}
+
+/* Skip link for keyboard users */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  padding: 8px 16px;
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  z-index: 100;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 0;
 }
 
 .container {
@@ -240,6 +267,11 @@ body {
   color: hsl(var(--foreground));
 }
 
+.logo:focus {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
 .main-nav {
   display: none;
   gap: 1.5rem;
@@ -264,6 +296,14 @@ body {
 .theme-toggle:hover {
   background-color: hsl(var(--accent));
   color: hsl(var(--accent-foreground));
+}
+
+/* Focus styles for buttons */
+.theme-toggle:focus,
+.contact-button:focus,
+.button:focus {
+  outline: 2px solid hsl(var(--primary));
+  box-shadow: 0 0 0 4px hsla(var(--primary) / 0.25);
 }
 
 .theme-toggle-icon {
@@ -303,10 +343,19 @@ body {
   text-decoration: none;
   color: hsl(var(--muted-foreground));
   transition: color 0.2s;
+  padding: 0.5rem;
 }
 
 .main-nav a:hover {
   color: hsl(var(--foreground));
+}
+
+/* Custom focus styles for navigation */
+.main-nav a:focus {
+  color: hsl(var(--primary));
+  text-decoration: underline;
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
 }
 
 .contact-button {
@@ -384,6 +433,7 @@ body {
   font-size: 0.875rem;
   color: white;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  font-weight: 500; /* Added for better readability */
 }
 
 .badge i {
@@ -553,9 +603,15 @@ body {
   transition: all 0.2s;
 }
 
-.skill-icon:hover {
+.skill-icon:hover,
+.skill-icon:focus {
   transform: translateY(-2px);
   border-color: rgba(100, 100, 110, 0.8);
+}
+
+.skill-icon:focus {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
 }
 
 .purple-icon {
@@ -615,10 +671,16 @@ body {
   height: 100%;
 }
 
-.project-card:hover {
+.project-card:hover,
+.project-card:focus-within {
   transform: translateY(-4px);
   border-color: hsl(348, 83%, 47%);
   box-shadow: 0 4px 20px rgba(220, 20, 60, 0.15);
+}
+
+.project-card:focus-within {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
 }
 
 .project-card img {
@@ -666,13 +728,19 @@ body {
 
 .project-tags span {
   padding: 0.375rem 0.75rem;
-  background-color: rgba(30, 30, 35, 0);
-  border: 1px solid rgba(100, 100, 110, 0.379);
+  background-color: hsl(var(--accent));
+  border: 1px solid hsl(var(--accent) / 0.5);
   border-radius: 9999px;
   font-size: 0.75rem;
   font-weight: 500;
-  color: white;
+  color: hsl(var(--accent-foreground));
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.dark .project-tags span {
+  background-color: hsl(var(--accent));
+  color: white;
+  border-color: hsl(var(--accent) / 0.5);
 }
 
 .project-links {
@@ -692,10 +760,17 @@ body {
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s;
+  padding: 0.25rem;
 }
 
 .project-link:hover {
   color: hsl(var(--primary) / 0.8);
+}
+
+.project-link:focus {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+  color: hsl(var(--primary));
 }
 
 .project-link i {
@@ -737,10 +812,18 @@ body {
   color: hsl(var(--muted-foreground));
   text-decoration: none;
   transition: color 0.2s;
+  padding: 0.5rem;
+  border-radius: var(--radius);
 }
 
 .contact-link:hover {
   color: hsl(var(--foreground));
+}
+
+.contact-link:focus {
+  color: hsl(var(--foreground));
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
 }
 
 /* Utilities */
@@ -1044,4 +1127,27 @@ html {
 
 .image-loaded {
   opacity: 1;
+}
+
+/* Accessibility helper classes */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Footer styles */
+.footer {
+  padding: 1.5rem 0;
+  text-align: center;
+  border-top: 1px solid hsl(var(--border));
+  margin-top: 2rem;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.875rem;
 }

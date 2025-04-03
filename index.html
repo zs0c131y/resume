@@ -14,21 +14,17 @@
       font-display="swap"
     />
     <link rel="stylesheet" href="index.css" />
-    <script
-      src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"
-      async
-      defer
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
     <link rel="icon" href="img/favicon.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" href="img/favicon.png" as="image" type="image/png" />
   </head>
   <body class="dark">
-    <header class="sticky-header">
+    <header class="sticky-header" role="banner">
       <div class="container header-container">
-        <a href="/" class="logo">{AG}</a>
-        <nav class="main-nav">
+        <a href="/" class="logo" aria-label="Home">{AG}</a>
+        <nav class="main-nav" role="navigation" aria-label="Main Navigation">
           <a href="#about">About</a>
           <a href="#skills">Skills</a>
           <a href="#projects">Projects</a>
@@ -40,32 +36,43 @@
             id="theme-toggle"
             class="theme-toggle"
             aria-label="Toggle dark/light mode"
+            aria-pressed="true"
           >
-            <i data-lucide="sun" class="theme-toggle-icon light-icon"></i>
-            <i data-lucide="moon" class="theme-toggle-icon dark-icon"></i>
+            <i
+              data-lucide="sun"
+              class="theme-toggle-icon light-icon"
+              aria-hidden="true"
+            ></i>
+            <i
+              data-lucide="moon"
+              class="theme-toggle-icon dark-icon"
+              aria-hidden="true"
+            ></i>
           </button>
           <a href="#contact" class="contact-button">Get in touch</a>
         </div>
       </div>
     </header>
 
-    <main>
+    <main id="main">
       <!-- Hero Section -->
-      <section class="hero">
+      <section class="hero" aria-labelledby="hero-heading">
         <div class="container">
           <div class="hero-content">
-            <h1>Hi, I'm <span class="text-primary">Adarsh Gupta</span></h1>
-            <div class="badges">
+            <h1 id="hero-heading">
+              Hi, I'm <span class="text-primary">Adarsh Gupta</span>
+            </h1>
+            <div class="badges" aria-label="Professional roles">
               <div class="badge">
-                <i data-lucide="terminal"></i>
+                <i data-lucide="terminal" aria-hidden="true"></i>
                 <span>Full Stack Developer</span>
               </div>
               <div class="badge">
-                <i data-lucide="shield"></i>
+                <i data-lucide="shield" aria-hidden="true"></i>
                 <span>Cybersecurity Analyst</span>
               </div>
               <div class="badge">
-                <i data-lucide="palette"></i>
+                <i data-lucide="palette" aria-hidden="true"></i>
                 <span>UI/UX Designer</span>
               </div>
             </div>
@@ -82,14 +89,14 @@
       </section>
 
       <!-- About Section -->
-      <section id="about" class="about">
+      <section id="about" class="about" aria-labelledby="about-heading">
         <div class="container">
-          <h2>About Me</h2>
+          <h2 id="about-heading">About Me</h2>
           <div class="about-grid">
             <div class="about-image">
               <img
                 src="img/profile.jpg"
-                alt="Profile"
+                alt="Adarsh Gupta profile portrait"
                 loading="lazy"
                 decoding="async"
               />
@@ -102,7 +109,7 @@
                 JavaScript, Node.js, Express.js, and MongoDB.
               </p>
               <p>
-                My experience extends beyond coding – I've contributed to
+                My experience extends beyond coding - I've contributed to
                 Telegram Messenger as a support team member and beta tester, and
                 I've written blogs for Signal's language love campaign. This
                 diverse background helps me create user-centric solutions.
@@ -117,15 +124,21 @@
                 <a
                   href="https://drive.google.com/file/d/1yULMzU-C019MqcbZAN2lTg_7RDSx02Uu/view?usp=sharing"
                   target="_blank"
+                  rel="noopener"
                   class="button secondary"
-                  >View Resume</a
+                  aria-label="View Resume (opens in new tab)"
                 >
+                  View Resume
+                </a>
                 <a
                   href="https://blog.adarshg.dev"
                   target="_blank"
+                  rel="noopener"
                   class="button secondary"
-                  >Read My Blog</a
+                  aria-label="Read My Blog (opens in new tab)"
                 >
+                  Read My Blog
+                </a>
               </div>
             </div>
           </div>
@@ -133,75 +146,127 @@
       </section>
 
       <!-- Skills Section -->
-      <section id="skills" class="skills">
+      <section id="skills" class="skills" aria-labelledby="skills-heading">
         <div class="container">
-          <h2>My Skills</h2>
+          <h2 id="skills-heading">My Skills</h2>
           <div class="skills-grid">
             <div class="skill-category">
-              <h3>Web Development</h3>
-              <div class="skill-icons">
-                <div class="skill-icon">
-                  <i data-lucide="code" class="purple-icon"></i>
+              <h3 id="web-dev-heading">Web Development</h3>
+              <div class="skill-icons" aria-labelledby="web-dev-heading">
+                <div class="skill-icon" tabindex="0">
+                  <i
+                    data-lucide="code"
+                    class="purple-icon"
+                    aria-hidden="true"
+                  ></i>
                   <span>HTML</span>
                 </div>
-                <div class="skill-icon">
-                  <i data-lucide="code" class="purple-icon"></i>
+                <div class="skill-icon" tabindex="0">
+                  <i
+                    data-lucide="code"
+                    class="purple-icon"
+                    aria-hidden="true"
+                  ></i>
                   <span>CSS</span>
                 </div>
-                <div class="skill-icon">
-                  <i data-lucide="code" class="purple-icon"></i>
+                <div class="skill-icon" tabindex="0">
+                  <i
+                    data-lucide="code"
+                    class="purple-icon"
+                    aria-hidden="true"
+                  ></i>
                   <span>JavaScript</span>
                 </div>
-                <div class="skill-icon">
-                  <i data-lucide="database" class="purple-icon"></i>
+                <div class="skill-icon" tabindex="0">
+                  <i
+                    data-lucide="database"
+                    class="purple-icon"
+                    aria-hidden="true"
+                  ></i>
                   <span>Node.js</span>
                 </div>
-                <div class="skill-icon">
-                  <i data-lucide="file" class="purple-icon"></i>
+                <div class="skill-icon" tabindex="0">
+                  <i
+                    data-lucide="file"
+                    class="purple-icon"
+                    aria-hidden="true"
+                  ></i>
                   <span>PHP</span>
                 </div>
-                <div class="skill-icon">
-                  <i data-lucide="globe" class="purple-icon"></i>
+                <div class="skill-icon" tabindex="0">
+                  <i
+                    data-lucide="globe"
+                    class="purple-icon"
+                    aria-hidden="true"
+                  ></i>
                   <span>WordPress</span>
                 </div>
               </div>
             </div>
 
             <div class="skill-category">
-              <h3>Programming Languages</h3>
-              <div class="skill-icons">
-                <div class="skill-icon">
-                  <i data-lucide="file-code" class="purple-icon"></i>
+              <h3 id="prog-lang-heading">Programming Languages</h3>
+              <div class="skill-icons" aria-labelledby="prog-lang-heading">
+                <div class="skill-icon" tabindex="0">
+                  <i
+                    data-lucide="file-code"
+                    class="purple-icon"
+                    aria-hidden="true"
+                  ></i>
                   <span>Java</span>
                 </div>
-                <div class="skill-icon">
-                  <i data-lucide="file-code" class="purple-icon"></i>
+                <div class="skill-icon" tabindex="0">
+                  <i
+                    data-lucide="file-code"
+                    class="purple-icon"
+                    aria-hidden="true"
+                  ></i>
                   <span>Python</span>
                 </div>
-                <div class="skill-icon">
-                  <i data-lucide="file-code" class="purple-icon"></i>
+                <div class="skill-icon" tabindex="0">
+                  <i
+                    data-lucide="file-code"
+                    class="purple-icon"
+                    aria-hidden="true"
+                  ></i>
                   <span>JavaScript</span>
                 </div>
-                <div class="skill-icon">
-                  <i data-lucide="file-code" class="purple-icon"></i>
+                <div class="skill-icon" tabindex="0">
+                  <i
+                    data-lucide="file-code"
+                    class="purple-icon"
+                    aria-hidden="true"
+                  ></i>
                   <span>PHP</span>
                 </div>
               </div>
             </div>
 
             <div class="skill-category">
-              <h3>Databases & Cloud</h3>
-              <div class="skill-icons">
-                <div class="skill-icon">
-                  <i data-lucide="database" class="purple-icon"></i>
+              <h3 id="db-cloud-heading">Databases & Cloud</h3>
+              <div class="skill-icons" aria-labelledby="db-cloud-heading">
+                <div class="skill-icon" tabindex="0">
+                  <i
+                    data-lucide="database"
+                    class="purple-icon"
+                    aria-hidden="true"
+                  ></i>
                   <span>MongoDB</span>
                 </div>
-                <div class="skill-icon">
-                  <i data-lucide="database" class="purple-icon"></i>
+                <div class="skill-icon" tabindex="0">
+                  <i
+                    data-lucide="database"
+                    class="purple-icon"
+                    aria-hidden="true"
+                  ></i>
                   <span>MySQL</span>
                 </div>
-                <div class="skill-icon">
-                  <i data-lucide="cloud" class="purple-icon"></i>
+                <div class="skill-icon" tabindex="0">
+                  <i
+                    data-lucide="cloud"
+                    class="purple-icon"
+                    aria-hidden="true"
+                  ></i>
                   <span>AWS</span>
                 </div>
               </div>
@@ -211,25 +276,35 @@
       </section>
 
       <!-- Projects Section -->
-      <section id="projects" class="projects">
+      <section
+        id="projects"
+        class="projects"
+        aria-labelledby="projects-heading"
+      >
         <div class="container">
-          <h2>Featured Projects</h2>
+          <h2 id="projects-heading">Featured Projects</h2>
           <div class="projects-grid">
-            <article class="project-card">
+            <article
+              class="project-card"
+              tabindex="0"
+              aria-labelledby="project-1-heading"
+            >
               <img
                 src="img/querit.png"
-                alt="Querit - Ask Questions, Get Answers"
+                alt="Screenshot of Querit platform interface"
                 loading="lazy"
                 decoding="async"
               />
               <div class="project-content">
-                <h3>Querit - Ask Questions, Get Answers.</h3>
+                <h3 id="project-1-heading">
+                  Querit - Ask Questions, Get Answers.
+                </h3>
                 <p>
                   A platform for students to ask questions and get answers,
                   facilitating academic collaboration, career guidance, and
                   professional networking with industry connections.
                 </p>
-                <div class="project-tags">
+                <div class="project-tags" aria-label="Technologies used">
                   <span>HTML</span>
                   <span>CSS</span>
                   <span>JavaScript</span>
@@ -240,33 +315,46 @@
                   <a
                     href="https://github.com/destyn8/querit"
                     class="project-link"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="Querit GitHub repository (opens in new tab)"
                   >
-                    <i data-lucide="github"></i>
+                    <i data-lucide="github" aria-hidden="true"></i>
                     GitHub
                   </a>
-                  <a href="https://querit.vercel.app/" class="project-link">
-                    <i data-lucide="external-link"></i>
+                  <a
+                    href="https://querit.vercel.app/"
+                    class="project-link"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="View live Querit project (opens in new tab)"
+                  >
+                    <i data-lucide="external-link" aria-hidden="true"></i>
                     Live
                   </a>
                 </div>
               </div>
             </article>
 
-            <article class="project-card">
+            <article
+              class="project-card"
+              tabindex="0"
+              aria-labelledby="project-2-heading"
+            >
               <img
                 src="img/portfolio.png"
-                alt="Personal Portfolio"
+                alt="Screenshot of personal portfolio website"
                 loading="lazy"
                 decoding="async"
               />
               <div class="project-content">
-                <h3>Personal Portfolio.</h3>
+                <h3 id="project-2-heading">Personal Portfolio.</h3>
                 <p>
                   A static portfolio website showcasing my work and projects,
                   hosted on GitHub Pages. Features a clean design and easy
                   navigation to my profiles and projects.
                 </p>
-                <div class="project-tags">
+                <div class="project-tags" aria-label="Technologies used">
                   <span>HTML</span>
                   <span>CSS</span>
                   <span>JavaScript</span>
@@ -275,31 +363,40 @@
                   <a
                     href="https://github.com/zs0c131y/resume"
                     class="project-link"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="Portfolio GitHub repository (opens in new tab)"
                   >
-                    <i data-lucide="github"></i>
+                    <i data-lucide="github" aria-hidden="true"></i>
                     GitHub
                   </a>
-                  <i data-lucide="info"></i>
-                  You are here!
+                  <span aria-label="Current website">
+                    <i data-lucide="info" aria-hidden="true"></i>
+                    You are here!
+                  </span>
                 </div>
               </div>
             </article>
 
-            <article class="project-card">
+            <article
+              class="project-card"
+              tabindex="0"
+              aria-labelledby="project-3-heading"
+            >
               <img
                 src="img/hive.png"
-                alt="Hive - Social App for Students"
+                alt="Screenshot of Hive social app interface"
                 loading="lazy"
                 decoding="async"
               />
               <div class="project-content">
-                <h3>Hive - Social App for Students.</h3>
+                <h3 id="project-3-heading">Hive - Social App for Students.</h3>
                 <p>
                   A React/Vite-based social platform enabling university
                   students to connect, share resources, and seek assistance.
                   Features modern UI components and secure authentication.
                 </p>
-                <div class="project-tags">
+                <div class="project-tags" aria-label="Technologies used">
                   <span>React</span>
                   <span>Vite</span>
                   <span>Node.js</span>
@@ -310,27 +407,42 @@
                   <a
                     href="https://github.com/zs0c131y/hive"
                     class="project-link"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="Hive GitHub repository (opens in new tab)"
                   >
-                    <i data-lucide="github"></i>
+                    <i data-lucide="github" aria-hidden="true"></i>
                     GitHub
                   </a>
-                  <a href="https://hive-wiir.onrender.com" class="project-link">
-                    <i data-lucide="external-link"></i>
+                  <a
+                    href="https://hive-wiir.onrender.com"
+                    class="project-link"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="View live Hive project (opens in new tab)"
+                  >
+                    <i data-lucide="external-link" aria-hidden="true"></i>
                     Live
                   </a>
                 </div>
               </div>
             </article>
 
-            <article class="project-card blossoms-card">
+            <article
+              class="project-card blossoms-card"
+              tabindex="0"
+              aria-labelledby="project-4-heading"
+            >
               <img
                 src="img/blossoms.png"
-                alt="Blossoms 2024-25"
+                alt="Blossoms 2024-25 event poster"
                 loading="lazy"
                 decoding="async"
               />
               <div class="project-content">
-                <h3>Blossoms 2024-25 - The Flagship Christ University Fest.</h3>
+                <h3 id="project-4-heading">
+                  Blossoms 2024-25 - The Flagship Christ University Fest.
+                </h3>
                 <p>
                   An annual cultural fest organised by the Student Welfare
                   Office, Blossoms seeks to host activities and competitions at
@@ -338,7 +450,7 @@
                   talent and skills among the students and participants,
                   Blossoms provides an opportunity on a bigger scale.
                 </p>
-                <div class="project-tags">
+                <div class="project-tags" aria-label="Technologies used">
                   <span>HTML</span>
                   <span>CSS</span>
                   <span>JavaScript</span>
@@ -347,30 +459,40 @@
                   <a
                     href="https://github.com/zs0c131y/blossoms"
                     class="project-link"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="Blossoms GitHub repository (opens in new tab)"
                   >
-                    <i data-lucide="github"></i>
+                    <i data-lucide="github" aria-hidden="true"></i>
                     GitHub
                   </a>
                   <a
                     href="https://blossomsbyc.netlify.app"
                     class="project-link"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="View live Blossoms project (opens in new tab)"
                   >
-                    <i data-lucide="external-link"></i>
+                    <i data-lucide="external-link" aria-hidden="true"></i>
                     Live
                   </a>
                 </div>
               </div>
             </article>
 
-            <article class="project-card">
+            <article
+              class="project-card"
+              tabindex="0"
+              aria-labelledby="project-5-heading"
+            >
               <img
                 src="img/trustvault.png"
-                alt="TrustVault"
+                alt="Screenshot of TrustVault application interface"
                 loading="lazy"
                 decoding="async"
               />
               <div class="project-content">
-                <h3>
+                <h3 id="project-5-heading">
                   TrustVault - Blockchain based Land Registry and Document
                   Verification.
                 </h3>
@@ -379,7 +501,7 @@
                   verification using Ethereum smart contracts and IPFS. Features
                   document hashing and multi-signature approvals.
                 </p>
-                <div class="project-tags">
+                <div class="project-tags" aria-label="Technologies used">
                   <span>Ethereum</span>
                   <span>IPFS</span>
                   <span>MongoDB</span>
@@ -390,12 +512,21 @@
                   <a
                     href="https://github.com/zs0c131y/trustvault"
                     class="project-link"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="TrustVault GitHub repository (opens in new tab)"
                   >
-                    <i data-lucide="github"></i>
+                    <i data-lucide="github" aria-hidden="true"></i>
                     GitHub
                   </a>
-                  <a href="https://trustvault.hopto.org" class="project-link">
-                    <i data-lucide="external-link"></i>
+                  <a
+                    href="https://trustvault.hopto.org"
+                    class="project-link"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="View live TrustVault project (opens in new tab)"
+                  >
+                    <i data-lucide="external-link" aria-hidden="true"></i>
                     Live
                   </a>
                 </div>
@@ -406,9 +537,9 @@
       </section>
 
       <!-- Contact Section -->
-      <section id="contact" class="contact">
+      <section id="contact" class="contact" aria-labelledby="contact-heading">
         <div class="container">
-          <h2>Get In Touch</h2>
+          <h2 id="contact-heading">Get In Touch</h2>
           <div class="contact-grid">
             <div class="contact-info">
               <p>
@@ -418,24 +549,32 @@
                 feel free to reach out!
               </p>
               <div class="contact-links">
-                <a href="mailto:gupthadarsh@gmail.com" class="contact-link">
-                  <i data-lucide="mail"></i>
+                <a
+                  href="mailto:gupthadarsh@gmail.com"
+                  class="contact-link"
+                  aria-label="Email: gupthadarsh@gmail.com"
+                >
+                  <i data-lucide="mail" aria-hidden="true"></i>
                   <span>gupthadarsh@gmail.com</span>
                 </a>
                 <a
                   href="https://github.com/zs0c131y"
                   target="_blank"
+                  rel="noopener"
                   class="contact-link"
+                  aria-label="GitHub profile: github.com/zs0c131y (opens in new tab)"
                 >
-                  <i data-lucide="github"></i>
+                  <i data-lucide="github" aria-hidden="true"></i>
                   <span>github.com/zs0c131y</span>
                 </a>
                 <a
                   href="https://linkedin.com/in/adarshagupta"
                   target="_blank"
+                  rel="noopener"
                   class="contact-link"
+                  aria-label="LinkedIn profile: linkedin.com/in/adarshagupta (opens in new tab)"
                 >
-                  <i data-lucide="linkedin"></i>
+                  <i data-lucide="linkedin" aria-hidden="true"></i>
                   <span>linkedin.com/in/adarshagupta</span>
                 </a>
               </div>
@@ -445,9 +584,33 @@
       </section>
     </main>
 
+    <footer role="contentinfo" class="footer">
+      <div class="container">
+        <p>
+          &copy; <span id="current-year">2024</span> Adarsh Gupta. All rights
+          reserved.
+        </p>
+      </div>
+    </footer>
+
     <script>
       // Initialize Lucide icons
-      lucide.createIcons();
+      document.addEventListener("DOMContentLoaded", function () {
+        // Check if Lucide is loaded, if not, retry after a delay
+        if (typeof lucide !== "undefined") {
+          lucide.createIcons();
+        } else {
+          setTimeout(function () {
+            if (typeof lucide !== "undefined") {
+              lucide.createIcons();
+            }
+          }, 1000);
+        }
+      });
+
+      // Set current year for footer copyright
+      document.getElementById("current-year").textContent =
+        new Date().getFullYear();
 
       // Function to log a stylish message to the console - Easter Egg
       function addConsoleEasterEgg() {
@@ -557,6 +720,7 @@
         const savedTheme = localStorage.getItem("theme");
         if (savedTheme === "light") {
           document.body.classList.remove("dark");
+          themeToggle.setAttribute("aria-pressed", "false");
         }
 
         // Handle theme toggle click
@@ -564,10 +728,12 @@
           // Toggle the dark class on the body
           document.body.classList.toggle("dark");
 
+          // Update aria-pressed state
+          const isDarkMode = document.body.classList.contains("dark");
+          themeToggle.setAttribute("aria-pressed", isDarkMode.toString());
+
           // Save the preference in localStorage
-          const currentTheme = document.body.classList.contains("dark")
-            ? "dark"
-            : "light";
+          const currentTheme = isDarkMode ? "dark" : "light";
           localStorage.setItem("theme", currentTheme);
         });
 
@@ -694,6 +860,11 @@
           eggContainer.style.zIndex = "9999";
           eggContainer.style.pointerEvents = "none";
           eggContainer.style.overflow = "hidden";
+          eggContainer.setAttribute(
+            "aria-label",
+            "Konami Code Easter Egg Animation"
+          );
+          eggContainer.setAttribute("role", "presentation");
 
           // Add 30 small colored divs that will float around
           for (let i = 0; i < 30; i++) {
@@ -746,9 +917,19 @@
           eggContainer.appendChild(message);
           document.body.appendChild(eggContainer);
 
+          // Announce to screen readers
+          const announcement = document.createElement("div");
+          announcement.setAttribute("role", "status");
+          announcement.setAttribute("aria-live", "polite");
+          announcement.className = "sr-only";
+          announcement.textContent =
+            "Konami code activated! Visual animation playing.";
+          document.body.appendChild(announcement);
+
           // Remove the animation after 4 seconds
           setTimeout(() => {
             document.body.removeChild(eggContainer);
+            document.body.removeChild(announcement);
           }, 4000);
         }
 
@@ -758,6 +939,15 @@
             "%cInitiating the Matrix...",
             "color: #00FF00; font-family: monospace; font-size: 16px;"
           );
+
+          // Announce to screen readers
+          const announcement = document.createElement("div");
+          announcement.setAttribute("role", "status");
+          announcement.setAttribute("aria-live", "polite");
+          announcement.className = "sr-only";
+          announcement.textContent =
+            "Matrix animation activated! Press the Exit Matrix button at the bottom right to stop.";
+          document.body.appendChild(announcement);
 
           // Create the matrix effect
           const canvas = document.createElement("canvas");
@@ -770,6 +960,7 @@
           canvas.style.zIndex = "9999";
           canvas.width = window.innerWidth;
           canvas.height = window.innerHeight;
+          canvas.setAttribute("aria-hidden", "true");
           document.body.appendChild(canvas);
 
           let chars = "ADARSHGUPTAJAVASCRIPTPYTHONHTMLCSSKUNG0123456789";
@@ -817,7 +1008,7 @@
           // Run the animation at 35 FPS
           const matrixInterval = setInterval(draw, 35);
 
-          // Create a close button
+          // Create a close button with enhanced accessibility
           const closeButton = document.createElement("button");
           closeButton.textContent = "Exit Matrix";
           closeButton.style.position = "fixed";
@@ -831,45 +1022,63 @@
           closeButton.style.borderRadius = "5px";
           closeButton.style.fontFamily = "monospace";
           closeButton.style.cursor = "pointer";
+          closeButton.setAttribute("aria-label", "Stop Matrix animation");
           document.body.appendChild(closeButton);
+
+          // Focus the close button for keyboard accessibility
+          setTimeout(() => {
+            closeButton.focus();
+          }, 100);
 
           // Add event listener to close button
           closeButton.addEventListener("click", () => {
             clearInterval(matrixInterval);
             document.body.removeChild(canvas);
             document.body.removeChild(closeButton);
+            document.body.removeChild(announcement);
+
+            // Announce end to screen readers
+            const endAnnouncement = document.createElement("div");
+            endAnnouncement.setAttribute("role", "status");
+            endAnnouncement.setAttribute("aria-live", "polite");
+            endAnnouncement.className = "sr-only";
+            endAnnouncement.textContent = "Matrix animation stopped.";
+            document.body.appendChild(endAnnouncement);
+
+            setTimeout(() => {
+              document.body.removeChild(endAnnouncement);
+            }, 1000);
           });
         };
-      });
 
-      // Progressive image loading
-      function setupProgressiveImageLoading() {
-        const images = document.querySelectorAll('img[loading="lazy"]');
+        // Progressive image loading
+        function setupProgressiveImageLoading() {
+          const images = document.querySelectorAll('img[loading="lazy"]');
 
-        // Add a placeholder class to all lazy-loaded images
-        images.forEach((img) => {
-          img.classList.add("image-loading");
+          // Add a placeholder class to all lazy-loaded images
+          images.forEach((img) => {
+            img.classList.add("image-loading");
 
-          // When image finishes loading, remove placeholder
-          img.addEventListener("load", () => {
-            img.classList.remove("image-loading");
-            img.classList.add("image-loaded");
+            // When image finishes loading, remove placeholder
+            img.addEventListener("load", () => {
+              img.classList.remove("image-loading");
+              img.classList.add("image-loaded");
+            });
           });
+        }
+
+        // Add loading indicator for slow connections
+        window.addEventListener("load", () => {
+          // Remove a loading class from body if you add one
+          document.body.classList.remove("is-loading");
         });
-      }
 
-      // Add loading indicator for slow connections
-      window.addEventListener("load", () => {
-        // Remove a loading class from body if you add one
-        document.body.classList.remove("is-loading");
+        // Call the functions when the page is fully loaded
+        document.addEventListener("DOMContentLoaded", () => {
+          addConsoleEasterEgg();
+          setupProgressiveImageLoading();
+        });
       });
-
-      // Call the function when the page is fully loaded
-      document.addEventListener(
-        "DOMContentLoaded",
-        addConsoleEasterEgg,
-        setupProgressiveImageLoading
-      );
     </script>
   </body>
 </html>
