@@ -776,12 +776,17 @@
           // Close menu when clicking overlay
           overlay.addEventListener("click", toggleMenu);
 
-          // Close menu when clicking a nav link
+          // Close menu when clicking a nav link - Fix for the links
           const navLinks = mainNav.querySelectorAll("a");
           navLinks.forEach((link) => {
             link.addEventListener("click", () => {
               if (mainNav.classList.contains("open")) {
-                toggleMenu();
+                // Directly apply the changes instead of calling toggleMenu
+                mobileMenuToggle.classList.remove("open");
+                mainNav.classList.remove("open");
+                overlay.classList.remove("open");
+                mobileMenuToggle.setAttribute("aria-expanded", "false");
+                document.body.style.overflow = "";
               }
             });
           });
