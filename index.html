@@ -15,11 +15,11 @@
     />
     <link rel="stylesheet" href="index.css" />
     <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
-    <script
+    <!-- <script
       src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
       async
       defer
-    ></script>
+    ></script> -->
     <link rel="icon" href="img/favicon.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -749,20 +749,15 @@
           localStorage.setItem("theme", currentTheme);
         });
 
-        function fixMobileNavigation() {
-          // Get all the necessary elements
+        // Mobile Menu Toggle
+        function setupMobileMenu() {
           const mobileMenuToggle =
             document.getElementById("mobile-menu-toggle");
           const mainNav = document.querySelector(".main-nav");
           const overlay = document.querySelector(".menu-overlay");
-          const navLinks = document.querySelectorAll(".main-nav a[href^='#']");
 
-          if (!mobileMenuToggle || !mainNav || !overlay) {
-            console.error("Required mobile menu elements not found");
-            return;
-          }
+          if (!mobileMenuToggle || !mainNav || !overlay) return;
 
-          // Toggle function to open/close the mobile menu
           function toggleMenu() {
             mobileMenuToggle.classList.toggle("open");
             mainNav.classList.toggle("open");
@@ -776,56 +771,55 @@
             document.body.style.overflow = isExpanded ? "hidden" : "";
           }
 
-          // Add click event for the menu toggle
+          // Toggle menu button event
           mobileMenuToggle.addEventListener("click", toggleMenu);
-
-          // Add click event for the overlay
           overlay.addEventListener("click", toggleMenu);
 
-          // Handle clicks on navigation links
+          // Handle nav links
+          const navLinks = mainNav.querySelectorAll("a");
+
           navLinks.forEach((link) => {
             link.addEventListener("click", function (e) {
-              e.preventDefault(); // Prevent default anchor behavior
+              const href = this.getAttribute("href");
 
-              // First, close the mobile menu
-              if (mainNav.classList.contains("open")) {
-                mobileMenuToggle.classList.remove("open");
-                mainNav.classList.remove("open");
-                overlay.classList.remove("open");
-                mobileMenuToggle.setAttribute("aria-expanded", "false");
-                document.body.style.overflow = "";
-              }
+              // For internal links starting with #
+              if (href.startsWith("#")) {
+                e.preventDefault();
 
-              // Get the target section ID
-              const targetId = this.getAttribute("href");
+                // Close the menu first
+                toggleMenu();
 
-              // Find the target element
-              const targetElement = document.querySelector(targetId);
-
-              if (targetElement) {
-                // Small delay to ensure menu closing animation doesn't interfere
+                // Wait for the menu animation to complete before navigating
                 setTimeout(() => {
-                  // Get the header height for proper offset
-                  const headerHeight =
-                    document.querySelector(".sticky-header").offsetHeight;
+                  const targetElement = document.querySelector(href);
 
-                  // Calculate the position with offset
-                  const targetPosition =
-                    targetElement.getBoundingClientRect().top +
-                    window.pageYOffset -
-                    headerHeight;
+                  if (targetElement) {
+                    const headerHeight =
+                      document.querySelector(".sticky-header").offsetHeight;
+                    const targetPosition =
+                      targetElement.getBoundingClientRect().top +
+                      window.scrollY -
+                      headerHeight;
 
-                  // Scroll to the target section
-                  window.scrollTo({
-                    top: targetPosition,
-                    behavior: "smooth",
-                  });
-                }, 100); // Small timeout to ensure menu is fully closed
+                    window.scrollTo({
+                      top: targetPosition,
+                      behavior: "smooth",
+                    });
+
+                    history.pushState(null, null, href);
+                  }
+                }, 300); // Adjust delay to match your menu animation duration
+              } else {
+                // External links: Close menu then navigate
+                toggleMenu();
+                setTimeout(() => {
+                  window.location.href = href;
+                }, 300); // Allow menu closing animation to complete
               }
             });
           });
 
-          // Close menu when ESC key is pressed
+          // Close menu on ESC key press
           document.addEventListener("keydown", (e) => {
             if (e.key === "Escape" && mainNav.classList.contains("open")) {
               toggleMenu();
@@ -1175,8 +1169,7 @@
 
         // Set up smooth scrolling
         function setupSmoothScrolling() {
-          // Select all navigation links that have href attributes starting with #
-          const navLinks = document.querySelectorAll('a[href^="#"]');
+          const navLinks = document.querySelectorAll('.main-nav a[href^="#"]');
 
           navLinks.forEach((link) => {
             link.addEventListener("click", function (e) {
@@ -1211,12 +1204,10 @@
                     ".mobile-menu-toggle.open"
                   );
                   const overlay = document.querySelector(".menu-overlay.open");
-
                   if (mobileMenu && mobileToggle && overlay) {
                     mobileMenu.classList.remove("open");
                     mobileToggle.classList.remove("open");
                     overlay.classList.remove("open");
-                    mobileToggle.setAttribute("aria-expanded", "false");
                     document.body.style.overflow = "";
                   }
                 }
@@ -1480,7 +1471,6 @@
         setupSmoothScrolling();
         setupScrollAnimations();
         setupPageLoadingBar();
-        fixMobileNavigation();
 
         // Add scroll event listener
         window.addEventListener("scroll", updateActiveNavLink);

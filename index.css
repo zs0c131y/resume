@@ -1262,21 +1262,23 @@ html {
 
   /* Overlay when menu is open */
   .menu-overlay {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 80;
+    z-index: 10; /* Ensure it's below the nav menu */
+    transition: opacity 0.3s;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    visibility: hidden; /* Make it invisible when not active */
+    pointer-events: none; /* Prevent interactions when not active */
   }
 
   .menu-overlay.open {
-    display: block;
     opacity: 1;
+    visibility: visible; /* Allow visibility when the menu is active */
+    pointer-events: auto; /* Enable interactions when menu is open */
   }
 
   /* Adjust header right on mobile */
