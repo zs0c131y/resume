@@ -65,7 +65,7 @@ body:not(.dark) .skill-icon {
 
 body:not(.dark) .skill-icon:hover {
   border-color: hsl(var(--primary));
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 body:not(.dark) .project-card {
@@ -635,7 +635,17 @@ body {
 
 .skill-icon:hover {
   transform: translateY(-2px);
+<<<<<<< Updated upstream
   border-color: hsl(var(--primary));
+=======
+  border-color: hsl(348, 83%, 47%);
+  box-shadow: 0 4px 20px rgba(220, 20, 60, 0.15);
+}
+
+.skill-icon:focus {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+>>>>>>> Stashed changes
 }
 
 .purple-icon {
