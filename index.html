@@ -749,7 +749,6 @@
           localStorage.setItem("theme", currentTheme);
         });
 
-        // Mobile Menu Toggle
         function setupMobileMenu() {
           const mobileMenuToggle =
             document.getElementById("mobile-menu-toggle");
@@ -775,21 +774,6 @@
 
           // Close menu when clicking overlay
           overlay.addEventListener("click", toggleMenu);
-
-          // Close menu when clicking a nav link - Fix for the links
-          const navLinks = mainNav.querySelectorAll("a");
-          navLinks.forEach((link) => {
-            link.addEventListener("click", () => {
-              if (mainNav.classList.contains("open")) {
-                // Directly apply the changes instead of calling toggleMenu
-                mobileMenuToggle.classList.remove("open");
-                mainNav.classList.remove("open");
-                overlay.classList.remove("open");
-                mobileMenuToggle.setAttribute("aria-expanded", "false");
-                document.body.style.overflow = "";
-              }
-            });
-          });
 
           // Close menu when ESC key is pressed
           document.addEventListener("keydown", (e) => {
@@ -1141,7 +1125,8 @@
 
         // Set up smooth scrolling
         function setupSmoothScrolling() {
-          const navLinks = document.querySelectorAll('.main-nav a[href^="#"]');
+          // Select all navigation links that have href attributes starting with #
+          const navLinks = document.querySelectorAll('a[href^="#"]');
 
           navLinks.forEach((link) => {
             link.addEventListener("click", function (e) {
@@ -1176,10 +1161,12 @@
                     ".mobile-menu-toggle.open"
                   );
                   const overlay = document.querySelector(".menu-overlay.open");
+
                   if (mobileMenu && mobileToggle && overlay) {
                     mobileMenu.classList.remove("open");
                     mobileToggle.classList.remove("open");
                     overlay.classList.remove("open");
+                    mobileToggle.setAttribute("aria-expanded", "false");
                     document.body.style.overflow = "";
                   }
                 }
