@@ -1466,6 +1466,69 @@
           }, 1000);
         }
 
+        // Add a class to detect JS capability and initialize focus management
+        document.documentElement.classList.add("js-focus-visible");
+
+        // Track whether the user is using keyboard navigation
+        let usingKeyboard = false;
+
+        // Set usingKeyboard to true when Tab key is pressed
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Tab") {
+            usingKeyboard = true;
+            document.documentElement.classList.add("user-is-tabbing");
+          }
+        });
+
+        // Reset to mouse mode on mouse interaction
+        document.addEventListener("mousedown", function () {
+          usingKeyboard = false;
+          document.documentElement.classList.remove("user-is-tabbing");
+
+          // Remove focus from any currently focused element when clicking elsewhere
+          // This helps avoid elements staying focused after clicking
+          document.querySelectorAll(":focus").forEach((element) => {
+            if (
+              document.activeElement !== element &&
+              element !== document.body
+            ) {
+              element.blur();
+            }
+          });
+        });
+
+        // Add focus-visible class to elements when they receive focus via keyboard
+        document.addEventListener("focusin", function (e) {
+          if (usingKeyboard) {
+            e.target.classList.add("focus-visible");
+          } else {
+            // For mouse focus, ensure we don't get stuck outlines
+            e.target.classList.remove("focus-visible");
+          }
+        });
+
+        // Remove focus-visible class when focus is lost
+        document.addEventListener("focusout", function (e) {
+          e.target.classList.remove("focus-visible");
+        });
+
+        // Special handling for navigation links
+        const navLinks = document.querySelectorAll(".main-nav a");
+        navLinks.forEach((link) => {
+          // When clicking a nav link, prevent the focus outline
+          link.addEventListener("mousedown", function (e) {
+            // Add a one-time focus handler to remove focus after click
+            this.addEventListener("focus", function onFocus() {
+              // Only blur if not using keyboard
+              if (!usingKeyboard) {
+                setTimeout(() => this.blur(), 100);
+              }
+              // Remove this one-time handler
+              this.removeEventListener("focus", onFocus);
+            });
+          });
+        });
+
         // Call all setup functions
         addConsoleEasterEgg();
         setupMobileMenu();

@@ -1479,3 +1479,126 @@ body {
     -webkit-tap-highlight-color: transparent;
   }
 }
+
+/* Global focus style reset */
+:focus {
+  /* Remove default outline for all elements when focused */
+  outline: none !important;
+}
+
+/* Only show focus styles when using keyboard navigation */
+:focus-visible {
+  outline: 2px solid hsl(var(--primary)) !important;
+  outline-offset: 2px !important;
+}
+
+/* Navigation specific focus styles */
+.main-nav a:focus {
+  outline: none !important;
+  text-decoration: none !important;
+}
+
+.main-nav a:focus::after {
+  /* Prevent the underline animation on mouse click */
+  width: 0 !important;
+}
+
+.main-nav a:focus:active::after {
+  /* Keep the current width on active click state */
+  width: 0 !important;
+}
+
+/* Only show underline and highlight when keyboard navigating */
+.main-nav a:focus-visible {
+  color: hsl(var(--primary)) !important;
+  text-decoration: underline !important;
+  outline: 2px solid hsl(var(--primary)) !important;
+  outline-offset: 2px !important;
+}
+
+.main-nav a:focus-visible::after {
+  width: 100% !important;
+}
+
+/* Active state should always show the underline */
+.main-nav a.active::after {
+  width: 100% !important;
+}
+
+/* Dark mode focus styles */
+.dark :focus-visible {
+  outline-color: hsl(var(--primary) / 0.8) !important;
+}
+
+/* Button focus styles */
+button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+button:focus-visible {
+  box-shadow: 0 0 0 2px hsl(var(--background)),
+    0 0 0 4px hsla(var(--primary) / 0.7) !important;
+}
+
+/* All interactive elements focus styles */
+.theme-toggle:focus,
+.contact-button:focus,
+.button:focus,
+.mobile-menu-toggle:focus,
+.skill-icon:focus,
+.project-card:focus,
+.project-link:focus,
+.contact-link:focus,
+.logo:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Focus-visible styles for interactive elements */
+.theme-toggle:focus-visible,
+.contact-button:focus-visible,
+.button:focus-visible,
+.mobile-menu-toggle:focus-visible {
+  box-shadow: 0 0 0 2px hsl(var(--background)),
+    0 0 0 4px hsla(var(--primary) / 0.7) !important;
+}
+
+.skill-icon:focus-visible,
+.project-card:focus-visible,
+.project-link:focus-visible,
+.contact-link:focus-visible,
+.logo:focus-visible {
+  outline: 2px solid hsl(var(--primary)) !important;
+  outline-offset: 2px !important;
+}
+
+/* Project links and other specific elements */
+.project-link:focus-visible {
+  color: hsl(var(--primary)) !important;
+}
+
+.contact-link:focus-visible {
+  color: hsl(var(--foreground)) !important;
+}
+
+/* For browsers that don't support :focus-visible */
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+
+.js-focus-visible .main-nav a:focus:not(.focus-visible)::after {
+  width: 0 !important;
+}
+
+/* When using keyboard navigation */
+.user-is-tabbing .main-nav a:focus::after {
+  width: 100% !important;
+}
+
+/* Fix for iOS touch highlight */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
