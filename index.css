@@ -277,7 +277,7 @@ body {
   gap: 1.5rem;
 }
 
-/* Theme toggle styles */
+/* Theme toggle styles - FIXED */
 .theme-toggle {
   display: inline-flex;
   align-items: center;
@@ -291,6 +291,7 @@ body {
   cursor: pointer;
   transition: all 0.2s ease;
   margin-right: 0.5rem;
+  outline: none; /* Remove default outline */
 }
 
 .theme-toggle:hover {
@@ -298,12 +299,20 @@ body {
   color: hsl(var(--accent-foreground));
 }
 
-/* Focus styles for buttons */
+/* Focus styles for buttons - FIXED */
 .theme-toggle:focus,
 .contact-button:focus,
 .button:focus {
-  outline: 2px solid hsl(var(--primary));
-  box-shadow: 0 0 0 4px hsla(var(--primary) / 0.25);
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--background)),
+    0 0 0 4px hsla(var(--primary) / 0.7);
+}
+
+/* Remove focus styles after click - FIXED */
+.theme-toggle:focus:not(:focus-visible),
+.contact-button:focus:not(:focus-visible),
+.button:focus:not(:focus-visible) {
+  box-shadow: none;
 }
 
 .theme-toggle-icon {
@@ -340,14 +349,35 @@ body {
 }
 
 .main-nav a {
+  position: relative;
   text-decoration: none;
   color: hsl(var(--muted-foreground));
-  transition: color 0.2s;
+  transition: color 0.2s ease;
   padding: 0.5rem;
 }
 
 .main-nav a:hover {
   color: hsl(var(--foreground));
+}
+
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: hsl(var(--primary));
+  transition: width 0.3s ease;
+}
+
+.main-nav a:hover::after,
+.main-nav a:focus::after {
+  width: 100%;
+}
+
+.main-nav a.active::after {
+  width: 100%;
 }
 
 /* Custom focus styles for navigation */
@@ -829,6 +859,7 @@ body {
 /* Utilities */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Adds padding to account for the sticky header */
 }
 
 /* Section spacing */
@@ -1150,4 +1181,262 @@ html {
   margin-top: 2rem;
   color: hsl(var(--muted-foreground));
   font-size: 0.875rem;
+}
+
+/* Mobile Navigation Menu */
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: auto;
+  z-index: 100;
+}
+
+.hamburger-line {
+  width: 100%;
+  height: 3px;
+  background-color: hsl(var(--foreground));
+  transition: all 0.3s ease;
+  border-radius: 3px;
+}
+
+@media (max-width: 767px) {
+  .mobile-menu-toggle {
+    display: flex !important;
+    margin-right: 0.5rem;
+    position: relative;
+    z-index: 100;
+  }
+
+  .header-container {
+    position: relative;
+  }
+
+  /* Ensure the main navigation is properly styled */
+  .main-nav {
+    display: flex !important;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    background-color: hsl(var(--background));
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+    padding: 80px 2rem 2rem;
+    z-index: 90;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .main-nav.open {
+    right: 0;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .main-nav a {
+    padding: 1rem 0;
+    font-size: 1.25rem;
+    border-bottom: 1px solid hsl(var(--border));
+  }
+
+  /* Hamburger animation */
+  .mobile-menu-toggle.open .hamburger-line:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  .mobile-menu-toggle.open .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-menu-toggle.open .hamburger-line:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  /* Overlay when menu is open */
+  .menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 80;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .menu-overlay.open {
+    display: block;
+    opacity: 1;
+  }
+
+  /* Adjust header right on mobile */
+  .header-right {
+    margin-left: auto;
+  }
+}
+
+/* Loading animations and states */
+.loading-fade-in {
+  animation: fadein 1s ease-in-out;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Staggered loading animation for items in grids */
+.skill-icon,
+.project-card,
+.badge {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.skill-icon.loaded,
+.project-card.loaded,
+.badge.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Skeleton screens while content loads */
+.skeleton {
+  background-color: hsl(var(--muted));
+  background-image: linear-gradient(
+    90deg,
+    hsla(var(--muted), 0.1) 0%,
+    hsla(var(--muted), 0.5) 50%,
+    hsla(var(--muted), 0.1) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: var(--radius);
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Page transition */
+body {
+  opacity: 0;
+  animation: bodyFadeIn 0.5s ease-in forwards;
+}
+
+@keyframes bodyFadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Loading spinner for delayed content */
+.loading-spinner {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid hsla(var(--primary), 0.3);
+  border-radius: 50%;
+  border-top-color: hsl(var(--primary));
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Page loading indicator */
+.page-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: hsl(var(--primary));
+  z-index: 9999;
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: pageLoadingBar 2s ease-in-out forwards;
+  transition: opacity 0.3s ease; /* Add transition for smooth fade out */
+}
+
+@keyframes pageLoadingBar {
+  0% {
+    transform: scaleX(0);
+  }
+  50% {
+    transform: scaleX(0.5);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+/* Media query for reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .page-loading,
+  .loading-spinner,
+  .skeleton {
+    animation: none !important;
+  }
+
+  .skill-icon,
+  .project-card,
+  .badge {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Override for mobile menu toggle button focus - FIXED */
+.mobile-menu-toggle:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--background)),
+    0 0 0 4px hsla(var(--primary) / 0.7);
+}
+
+.mobile-menu-toggle:focus:not(:focus-visible) {
+  box-shadow: none;
+}
+
+/* Fix for theme toggle button in Safari */
+@supports (-webkit-touch-callout: none) {
+  .theme-toggle,
+  .mobile-menu-toggle {
+    -webkit-tap-highlight-color: transparent;
+  }
 }

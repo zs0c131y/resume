@@ -21,9 +21,20 @@
     <link rel="preload" href="img/favicon.png" as="image" type="image/png" />
   </head>
   <body class="dark">
+    <div class="page-loading"></div>
     <header class="sticky-header" role="banner">
       <div class="container header-container">
         <a href="/" class="logo" aria-label="Home">{AG}</a>
+        <button
+          id="mobile-menu-toggle"
+          class="mobile-menu-toggle"
+          aria-label="Toggle mobile menu"
+          aria-expanded="false"
+        >
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
         <nav class="main-nav" role="navigation" aria-label="Main Navigation">
           <a href="#about">About</a>
           <a href="#skills">Skills</a>
@@ -130,6 +141,7 @@
                 >
                   View Resume
                 </a>
+
                 <a
                   href="https://blog.adarshg.dev"
                   target="_blank"
@@ -322,6 +334,7 @@
                     <i data-lucide="github" aria-hidden="true"></i>
                     GitHub
                   </a>
+
                   <a
                     href="https://querit.vercel.app/"
                     class="project-link"
@@ -414,6 +427,7 @@
                     <i data-lucide="github" aria-hidden="true"></i>
                     GitHub
                   </a>
+
                   <a
                     href="https://hive-wiir.onrender.com"
                     class="project-link"
@@ -466,6 +480,7 @@
                     <i data-lucide="github" aria-hidden="true"></i>
                     GitHub
                   </a>
+
                   <a
                     href="https://blossomsbyc.netlify.app"
                     class="project-link"
@@ -519,6 +534,7 @@
                     <i data-lucide="github" aria-hidden="true"></i>
                     GitHub
                   </a>
+
                   <a
                     href="https://trustvault.hopto.org"
                     class="project-link"
@@ -557,6 +573,7 @@
                   <i data-lucide="mail" aria-hidden="true"></i>
                   <span>gupthadarsh@gmail.com</span>
                 </a>
+
                 <a
                   href="https://github.com/zs0c131y"
                   target="_blank"
@@ -567,6 +584,7 @@
                   <i data-lucide="github" aria-hidden="true"></i>
                   <span>github.com/zs0c131y</span>
                 </a>
+
                 <a
                   href="https://linkedin.com/in/adarshagupta"
                   target="_blank"
@@ -592,6 +610,8 @@
         </p>
       </div>
     </footer>
+
+    <div class="menu-overlay"></div>
 
     <script>
       // Initialize Lucide icons
@@ -714,6 +734,9 @@
 
       // Add this to your existing script at the end of the body
       document.addEventListener("DOMContentLoaded", () => {
+        // Make sure body is fully visible at startup
+        document.body.style.opacity = "1";
+
         const themeToggle = document.getElementById("theme-toggle");
 
         // Check for saved theme preference or use the default dark theme
@@ -736,6 +759,51 @@
           const currentTheme = isDarkMode ? "dark" : "light";
           localStorage.setItem("theme", currentTheme);
         });
+
+        // Mobile Menu Toggle
+        function setupMobileMenu() {
+          const mobileMenuToggle =
+            document.getElementById("mobile-menu-toggle");
+          const mainNav = document.querySelector(".main-nav");
+          const overlay = document.querySelector(".menu-overlay");
+
+          if (!mobileMenuToggle || !mainNav || !overlay) return;
+
+          function toggleMenu() {
+            mobileMenuToggle.classList.toggle("open");
+            mainNav.classList.toggle("open");
+            overlay.classList.toggle("open");
+
+            // Update aria attributes
+            const isExpanded = mobileMenuToggle.classList.contains("open");
+            mobileMenuToggle.setAttribute("aria-expanded", isExpanded);
+
+            // Prevent body scrolling when menu is open
+            document.body.style.overflow = isExpanded ? "hidden" : "";
+          }
+
+          mobileMenuToggle.addEventListener("click", toggleMenu);
+
+          // Close menu when clicking overlay
+          overlay.addEventListener("click", toggleMenu);
+
+          // Close menu when clicking a nav link
+          const navLinks = mainNav.querySelectorAll("a");
+          navLinks.forEach((link) => {
+            link.addEventListener("click", () => {
+              if (mainNav.classList.contains("open")) {
+                toggleMenu();
+              }
+            });
+          });
+
+          // Close menu when ESC key is pressed
+          document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && mainNav.classList.contains("open")) {
+              toggleMenu();
+            }
+          });
+        }
 
         // Track clicks on the logo - Easter Egg
         let logoClickCount = 0;
@@ -1051,33 +1119,206 @@
           });
         };
 
-        // Progressive image loading
-        function setupProgressiveImageLoading() {
-          const images = document.querySelectorAll('img[loading="lazy"]');
+        // Add active class to navigation links based on scroll position
+        function updateActiveNavLink() {
+          const sections = document.querySelectorAll("section[id]");
+          const scrollPosition = window.scrollY + 100; // Offset for header
 
-          // Add a placeholder class to all lazy-loaded images
-          images.forEach((img) => {
-            img.classList.add("image-loading");
+          sections.forEach((section) => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute("id");
+            const navLink = document.querySelector(
+              `.main-nav a[href="#${sectionId}"]`
+            );
 
-            // When image finishes loading, remove placeholder
-            img.addEventListener("load", () => {
-              img.classList.remove("image-loading");
-              img.classList.add("image-loaded");
+            if (
+              navLink &&
+              scrollPosition >= sectionTop &&
+              scrollPosition < sectionTop + sectionHeight
+            ) {
+              document.querySelectorAll(".main-nav a").forEach((link) => {
+                link.classList.remove("active");
+              });
+              navLink.classList.add("active");
+            }
+          });
+        }
+
+        // Set up smooth scrolling
+        function setupSmoothScrolling() {
+          const navLinks = document.querySelectorAll('.main-nav a[href^="#"]');
+
+          navLinks.forEach((link) => {
+            link.addEventListener("click", function (e) {
+              // Only process internal links
+              if (this.getAttribute("href").startsWith("#")) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute("href");
+                if (targetId === "#") return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                  // Get header height for offset
+                  const headerHeight =
+                    document.querySelector(".sticky-header").offsetHeight;
+
+                  // Calculate position with offset
+                  const targetPosition =
+                    targetElement.getBoundingClientRect().top +
+                    window.pageYOffset -
+                    headerHeight;
+
+                  // Smooth scroll
+                  window.scrollTo({
+                    top: targetPosition,
+                    behavior: "smooth",
+                  });
+
+                  // Close mobile menu if open
+                  const mobileMenu = document.querySelector(".main-nav.open");
+                  const mobileToggle = document.querySelector(
+                    ".mobile-menu-toggle.open"
+                  );
+                  const overlay = document.querySelector(".menu-overlay.open");
+                  if (mobileMenu && mobileToggle && overlay) {
+                    mobileMenu.classList.remove("open");
+                    mobileToggle.classList.remove("open");
+                    overlay.classList.remove("open");
+                    document.body.style.overflow = "";
+                  }
+                }
+              }
             });
           });
         }
 
-        // Add loading indicator for slow connections
-        window.addEventListener("load", () => {
-          // Remove a loading class from body if you add one
-          document.body.classList.remove("is-loading");
-        });
+        // Progressive image loading with skeletons
+        function setupProgressiveImageLoading() {
+          const images = document.querySelectorAll('img[loading="lazy"]');
 
-        // Call the functions when the page is fully loaded
-        document.addEventListener("DOMContentLoaded", () => {
-          addConsoleEasterEgg();
-          setupProgressiveImageLoading();
-        });
+          // Create placeholder for each image
+          images.forEach((img) => {
+            const parent = img.parentElement;
+
+            // Skip if parent not found or already has a skeleton
+            if (!parent || parent.querySelector(".skeleton")) return;
+
+            // Create skeleton placeholder
+            const placeholder = document.createElement("div");
+            placeholder.className = "skeleton";
+            placeholder.style.width = "100%";
+            placeholder.style.height = "100%";
+            placeholder.style.position = "absolute";
+            placeholder.style.top = "0";
+            placeholder.style.left = "0";
+
+            // Ensure parent has position relative
+            if (getComputedStyle(parent).position === "static") {
+              parent.style.position = "relative";
+            }
+
+            // Add placeholder before image
+            parent.insertBefore(placeholder, img);
+
+            // Show image when loaded and remove placeholder
+            img.classList.add("image-loading");
+
+            // Handle already loaded or cached images
+            if (img.complete) {
+              img.classList.remove("image-loading");
+              img.classList.add("image-loaded");
+              if (placeholder && placeholder.parentElement) {
+                placeholder.parentElement.removeChild(placeholder);
+              }
+            } else {
+              // Handle images that need to load
+              img.addEventListener("load", () => {
+                img.classList.remove("image-loading");
+                img.classList.add("image-loaded");
+                if (placeholder && placeholder.parentElement) {
+                  placeholder.parentElement.removeChild(placeholder);
+                }
+              });
+            }
+          });
+        }
+
+        // Animate elements when they come into view
+        function setupScrollAnimations() {
+          if ("IntersectionObserver" in window) {
+            const animateOnScroll = new IntersectionObserver(
+              (entries) => {
+                entries.forEach((entry) => {
+                  if (entry.isIntersecting) {
+                    setTimeout(() => {
+                      entry.target.classList.add("loaded");
+                    }, 100);
+                    animateOnScroll.unobserve(entry.target);
+                  }
+                });
+              },
+              { threshold: 0.1 }
+            );
+
+            // Observe elements
+            document
+              .querySelectorAll(".skill-icon, .project-card, .badge")
+              .forEach((el) => {
+                if (!el.classList.contains("loaded")) {
+                  animateOnScroll.observe(el);
+                }
+              });
+          } else {
+            // Fallback for browsers that don't support IntersectionObserver
+            document
+              .querySelectorAll(".skill-icon, .project-card, .badge")
+              .forEach((el) => {
+                el.classList.add("loaded");
+              });
+          }
+        }
+
+        function setupPageLoadingBar() {
+          // Get existing loading bar or create one if it doesn't exist
+          let loadingBar = document.querySelector(".page-loading");
+          if (!loadingBar) {
+            loadingBar = document.createElement("div");
+            loadingBar.className = "page-loading";
+            document.body.prepend(loadingBar); // Add to the beginning of the body
+          }
+
+          // Remove the loading bar when the window is fully loaded
+          window.addEventListener("load", () => {
+            // Keep the bar visible for a moment so users can see the completion
+            setTimeout(() => {
+              // Fade out the loading bar
+              loadingBar.style.opacity = "0";
+
+              // Then remove it completely after the fade out
+              setTimeout(() => {
+                if (loadingBar.parentNode) {
+                  loadingBar.parentNode.removeChild(loadingBar);
+                }
+              }, 300); // Slightly longer than the CSS transition duration
+            }, 500); // Short delay to show completion
+          });
+        }
+
+        // Call all setup functions
+        addConsoleEasterEgg();
+        setupMobileMenu();
+        setupProgressiveImageLoading();
+        setupSmoothScrolling();
+        setupScrollAnimations();
+        setupPageLoadingBar();
+
+        // Add scroll event listener
+        window.addEventListener("scroll", updateActiveNavLink);
+
+        // Initial call to set active link
+        updateActiveNavLink();
       });
     </script>
   </body>
