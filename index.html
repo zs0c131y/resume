@@ -15,6 +15,11 @@
     />
     <link rel="stylesheet" href="index.css" />
     <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+      async
+      defer
+    ></script>
     <link rel="icon" href="img/favicon.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,6 +27,7 @@
   </head>
   <body class="dark">
     <div class="page-loading"></div>
+    <div id="turnstile-container" style="position: fixed; z-index: 9999"></div>
     <header class="sticky-header" role="banner">
       <div class="container header-container">
         <a href="/" class="logo" aria-label="Home">{AG}</a>
@@ -296,10 +302,7 @@
         <div class="container">
           <h2 id="projects-heading">Featured Projects</h2>
           <div class="projects-grid">
-            <article
-              class="project-card"
-              aria-labelledby="project-1-heading"
-            >
+            <article class="project-card" aria-labelledby="project-1-heading">
               <img
                 src="img/querit.png"
                 alt="Screenshot of Querit platform interface"
@@ -348,10 +351,7 @@
               </div>
             </article>
 
-            <article
-              class="project-card"
-              aria-labelledby="project-2-heading"
-            >
+            <article class="project-card" aria-labelledby="project-2-heading">
               <img
                 src="img/portfolio.png"
                 alt="Screenshot of personal portfolio website"
@@ -389,10 +389,7 @@
               </div>
             </article>
 
-            <article
-              class="project-card"
-              aria-labelledby="project-3-heading"
-            >
+            <article class="project-card" aria-labelledby="project-3-heading">
               <img
                 src="img/hive.png"
                 alt="Screenshot of Hive social app interface"
@@ -491,10 +488,7 @@
               </div>
             </article>
 
-            <article
-              class="project-card"
-              aria-labelledby="project-5-heading"
-            >
+            <article class="project-card" aria-labelledby="project-5-heading">
               <img
                 src="img/trustvault.png"
                 alt="Screenshot of TrustVault application interface"
@@ -1299,6 +1293,142 @@
               }, 300); // Slightly longer than the CSS transition duration
             }, 500); // Short delay to show completion
           });
+        }
+
+        // Initialize Turnstile for site protection
+        function initTurnstile() {
+          // Check if user has already been verified in this session
+          if (sessionStorage.getItem("turnstile_verified") === "true") {
+            return; // Skip verification if already done
+          }
+
+          // Create an overlay to block interaction until verification completes
+          const overlay = document.createElement("div");
+          overlay.id = "turnstile-overlay";
+          overlay.style.position = "fixed";
+          overlay.style.top = "0";
+          overlay.style.left = "0";
+          overlay.style.width = "100%";
+          overlay.style.height = "100%";
+          overlay.style.backgroundColor = "rgba(0, 0, 0, 0.85)";
+          overlay.style.zIndex = "9998";
+          overlay.style.display = "flex";
+          overlay.style.justifyContent = "center";
+          overlay.style.alignItems = "center";
+          overlay.style.backdropFilter = "blur(5px)";
+
+          // Create modal container with better design
+          const modal = document.createElement("div");
+          modal.style.backgroundColor = "#121212";
+          modal.style.color = "#ffffff";
+          modal.style.borderRadius = "12px";
+          modal.style.boxShadow = "0 25px 50px -12px rgba(0, 0, 0, 0.5)";
+          modal.style.overflow = "hidden";
+          modal.style.width = "400px";
+          modal.style.maxWidth = "92%";
+          modal.style.border = "1px solid rgba(255, 255, 255, 0.1)";
+
+          // Modal header
+          const header = document.createElement("div");
+          header.style.padding = "20px 24px";
+          header.style.borderBottom = "1px solid rgba(255, 255, 255, 0.1)";
+          header.style.backgroundColor = "rgba(255, 255, 255, 0.03)";
+
+          // Add logo similar to your site's {AG} logo
+          const logo = document.createElement("div");
+          logo.style.marginBottom = "12px";
+          logo.style.fontFamily = "Inter, system-ui, sans-serif";
+          logo.style.fontWeight = "600";
+          logo.style.fontSize = "18px";
+          logo.style.color = "#FF6B6B";
+          logo.textContent = "{AG}";
+
+          // Add title with matching typography
+          const title = document.createElement("h3");
+          title.style.margin = "0";
+          title.style.fontFamily = "Inter, system-ui, sans-serif";
+          title.style.fontWeight = "600";
+          title.style.fontSize = "22px";
+          title.style.lineHeight = "1.2";
+          title.textContent = "Human Verification";
+
+          header.appendChild(logo);
+          header.appendChild(title);
+
+          // Modal body
+          const body = document.createElement("div");
+          body.style.padding = "20px 24px";
+
+          // Message with improved typography
+          const message = document.createElement("p");
+          message.style.margin = "0 0 20px 0";
+          message.style.fontFamily = "Inter, system-ui, sans-serif";
+          message.style.fontSize = "15px";
+          message.style.lineHeight = "1.5";
+          message.style.color = "rgba(255, 255, 255, 0.8)";
+          message.textContent =
+            "Hello human! Thank you for your patience while I load the site for you.";
+
+          // Create a new container for the Turnstile widget INSIDE the modal
+          const widgetContainer = document.createElement("div");
+          widgetContainer.id = "cf-turnstile-container";
+          widgetContainer.style.display = "flex";
+          widgetContainer.style.justifyContent = "center";
+          widgetContainer.style.marginTop = "16px";
+
+          body.appendChild(message);
+          body.appendChild(widgetContainer);
+
+          // Assemble the modal
+          modal.appendChild(header);
+          modal.appendChild(body);
+          overlay.appendChild(modal);
+
+          // Add to document
+          document.body.appendChild(overlay);
+
+          // Function to handle successful verification
+          function turnstileCallback(token) {
+            // Store verification in session storage
+            sessionStorage.setItem("turnstile_verified", "true");
+
+            // Fade out the overlay
+            overlay.style.transition = "opacity 0.3s ease";
+            overlay.style.opacity = "0";
+
+            // Remove after transition
+            setTimeout(() => {
+              if (overlay.parentNode) {
+                document.body.removeChild(overlay);
+              }
+            }, 300);
+          }
+
+          // Function to handle expired tokens
+          function turnstileExpiredCallback() {
+            // Reset the widget if the token expires
+            turnstile.reset("#cf-turnstile-container");
+          }
+
+          // Render the Turnstile widget inside our new container
+          turnstile.render("#cf-turnstile-container", {
+            sitekey: "0x4AAAAAABDpt1p9mIKES9G4",
+            callback: turnstileCallback,
+            "expired-callback": turnstileExpiredCallback,
+            theme: "dark",
+          });
+        }
+
+        // Initialize Turnstile on page load
+        if (typeof turnstile !== "undefined") {
+          initTurnstile();
+        } else {
+          // If Turnstile is not loaded, retry after a delay
+          setTimeout(() => {
+            if (typeof turnstile !== "undefined") {
+              initTurnstile();
+            }
+          }, 1000);
         }
 
         // Call all setup functions
