@@ -631,17 +631,12 @@ body {
   font-size: 1rem;
   font-weight: 500;
   transition: all 0.2s;
+  pointer-events: none;
 }
 
-.skill-icon:hover,
-.skill-icon:focus {
+.skill-icon:hover {
   transform: translateY(-2px);
-  border-color: rgba(100, 100, 110, 0.8);
-}
-
-.skill-icon:focus {
-  outline: 2px solid hsl(var(--primary));
-  outline-offset: 2px;
+  border-color: hsl(var(--primary));
 }
 
 .purple-icon {
@@ -701,16 +696,10 @@ body {
   height: 100%;
 }
 
-.project-card:hover,
-.project-card:focus-within {
+.project-card:hover {
   transform: translateY(-4px);
   border-color: hsl(348, 83%, 47%);
   box-shadow: 0 4px 20px rgba(220, 20, 60, 0.15);
-}
-
-.project-card:focus-within {
-  outline: 2px solid hsl(var(--primary));
-  outline-offset: 2px;
 }
 
 .project-card img {
