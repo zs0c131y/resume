@@ -808,6 +808,22 @@
                       behavior: "smooth",
                     });
 
+                    // After scrolling is complete, manually set active class
+                    setTimeout(() => {
+                      // Remove active class from all nav links
+                      document
+                        .querySelectorAll(".main-nav a")
+                        .forEach((navLink) => {
+                          navLink.classList.remove("active");
+                        });
+
+                      // Add active class to the clicked link
+                      this.classList.add("active");
+
+                      // Also trigger the updateActiveNavLink function to ensure consistency
+                      updateActiveNavLink();
+                    }, 500); // Adjust this timing based on your scroll animation duration
+
                     history.pushState(null, null, href);
                   }
                 }, 300); // Adjust delay to match your menu animation duration
@@ -1148,6 +1164,9 @@
           const sections = document.querySelectorAll("section[id]");
           const scrollPosition = window.scrollY + 100; // Offset for header
 
+          // Initialize a variable to track if any section is active
+          let anyActive = false;
+
           sections.forEach((section) => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.offsetHeight;
@@ -1156,17 +1175,58 @@
               `.main-nav a[href="#${sectionId}"]`
             );
 
+            // Check if the scroll position is within this section
             if (
               navLink &&
               scrollPosition >= sectionTop &&
               scrollPosition < sectionTop + sectionHeight
             ) {
+              // Remove active class from all navigation links
               document.querySelectorAll(".main-nav a").forEach((link) => {
                 link.classList.remove("active");
               });
+
+              // Add active class to the current section's navigation link
               navLink.classList.add("active");
+              anyActive = true;
             }
           });
+
+          // If we're at the very bottom of the page, activate the last section
+          if (
+            !anyActive &&
+            window.innerHeight + window.scrollY >=
+              document.body.offsetHeight - 10
+          ) {
+            const lastSection = sections[sections.length - 1];
+            if (lastSection) {
+              const lastSectionId = lastSection.getAttribute("id");
+              const lastNavLink = document.querySelector(
+                `.main-nav a[href="#${lastSectionId}"]`
+              );
+
+              if (lastNavLink) {
+                document.querySelectorAll(".main-nav a").forEach((link) => {
+                  link.classList.remove("active");
+                });
+                lastNavLink.classList.add("active");
+              }
+            }
+          }
+
+          // Special case for when we're at the top of the page (home/hero section)
+          if (scrollPosition < 150 && document.querySelector(".hero")) {
+            // If there's a home or first navigation item, activate it
+            const firstNavLink = document.querySelector(
+              ".main-nav a:first-child"
+            );
+            if (firstNavLink) {
+              document.querySelectorAll(".main-nav a").forEach((link) => {
+                link.classList.remove("active");
+              });
+              firstNavLink.classList.add("active");
+            }
+          }
         }
 
         // Set up smooth scrolling
@@ -1542,6 +1602,57 @@
 
         // Initial call to set active link
         updateActiveNavLink();
+
+        // Set active link based on the current URL hash
+        function setInitialActiveLink() {
+          // Get the current hash from the URL or default to the first section
+          const currentHash = window.location.hash || "#about";
+
+          // Find the matching navigation link
+          const activeNavLink = document.querySelector(
+            `.main-nav a[href="${currentHash}"]`
+          );
+
+          // If a matching link is found, set it as active
+          if (activeNavLink) {
+            document.querySelectorAll(".main-nav a").forEach((link) => {
+              link.classList.remove("active");
+            });
+            activeNavLink.classList.add("active");
+          } else {
+            // If no matching link, set the first one as active
+            const firstNavLink = document.querySelector(
+              ".main-nav a:first-child"
+            );
+            if (firstNavLink) {
+              firstNavLink.classList.add("active");
+            }
+          }
+        }
+
+        // Call on initialization to set the correct active link
+        setInitialActiveLink();
+
+        // Enhanced scroll event handling
+        let isScrolling;
+        window.addEventListener("scroll", function () {
+          // Clear our timeout throughout the scroll
+          window.clearTimeout(isScrolling);
+
+          // Run the active link update immediately during scroll
+          updateActiveNavLink();
+
+          // Set a timeout to run after scrolling ends (for smoother performance)
+          isScrolling = setTimeout(function () {
+            // Run our scroll functions after scrolling completes
+            updateActiveNavLink();
+          }, 66); // 66ms = approximately 15fps
+        });
+
+        // Also update active link on window resize (in case section positions change)
+        window.addEventListener("resize", function () {
+          updateActiveNavLink();
+        });
       });
     </script>
   </body>
