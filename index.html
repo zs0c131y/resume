@@ -45,6 +45,16 @@
     />
     <meta name="twitter:image" content="https://adarshg.dev/img/profile.jpg" />
 
+    <!-- PWA Support -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#FF6B6B" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Adarsh Gupta" />
+
     <!-- Fonts and Styles -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
@@ -676,6 +686,23 @@
     <div class="menu-overlay"></div>
 
     <script>
+      // Register Service Worker for offline capabilities
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .then((registration) => {
+              console.log(
+                "Service Worker registered with scope:",
+                registration.scope
+              );
+            })
+            .catch((error) => {
+              console.error("Service Worker registration failed:", error);
+            });
+        });
+      }
+
       // Initialize Lucide icons
       document.addEventListener("DOMContentLoaded", function () {
         // Check if Lucide is loaded, if not, retry after a delay
