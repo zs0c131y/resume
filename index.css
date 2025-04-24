@@ -176,6 +176,16 @@ body:not(.dark) .about-buttons .button:active {
   transform: translateY(0);
 }
 
+/* Light mode specific styles for about buttons - FIXED */
+body:not(.dark) .resume-button,
+body:not(.dark) .blog-button {
+  border-color: hsl(
+    var(--foreground)
+  ); /* Use foreground color for high contrast border */
+  color: hsl(var(--foreground));
+  border-width: 2px; /* Keeping 2px thick border */
+}
+
 .dark {
   --background: 240 10% 3.9%;
   --foreground: 0 0% 98%;
