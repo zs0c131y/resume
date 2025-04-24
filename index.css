@@ -1617,3 +1617,21 @@ button:focus-visible {
 * {
   -webkit-tap-highlight-color: transparent;
 }
+
+/* Style for the 'You are here!' indicator */
+.current-site-indicator {
+  display: inline-flex; /* Use flexbox for alignment */
+  align-items: center; /* Vertically align items in the middle */
+  gap: 0.5rem; /* Add space between icon and text, same as project-link */
+  color: hsl(
+    var(--muted-foreground)
+  ); /* Match text color with other links/text */
+  font-weight: 500; /* Match font weight with project-link */
+  padding: 0.25rem; /* Match padding with project-link */
+}
+
+.current-site-indicator i {
+  width: 16px; /* Match icon size */
+  height: 16px; /* Match icon size */
+  color: hsl(var(--primary)); /* Use primary color for the icon */
+}
