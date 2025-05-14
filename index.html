@@ -44,7 +44,6 @@
       content="Portfolio of Adarsh, a BCA undergrad specializing in full stack development, cybersecurity, and UI/UX design"
     />
     <meta name="twitter:image" content="https://adarshg.dev/img/profile.jpg" />
-
     <!-- PWA Support -->
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#FF6B6B" />
@@ -54,6 +53,13 @@
       content="black-translucent"
     />
     <meta name="apple-mobile-web-app-title" content="Adarsh Gupta" />
+    <link rel="apple-touch-icon" href="img/favicon.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="img/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon.png" />
+    <link rel="apple-touch-icon" sizes="167x167" href="img/favicon.png" />
+    <link rel="mask-icon" href="img/favicon.png" color="#FF6B6B" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="Adarsh Gupta" />
 
     <!-- Fonts and Styles -->
     <link
@@ -150,6 +156,15 @@
             ></i>
           </button>
           <a href="#contact" class="contact-button">Get in touch</a>
+          <button
+            id="install-app"
+            class="install-button"
+            aria-label="Install app"
+            style="display: none"
+          >
+            <i data-lucide="download" aria-hidden="true"></i>
+            Install
+          </button>
         </div>
       </div>
     </header>
@@ -688,23 +703,223 @@
 
     <div class="menu-overlay"></div>
 
+    <!-- Update notification toast -->
+    <div id="update-toast" class="update-toast" style="display: none">
+      <div class="update-toast-content">
+        <i data-lucide="refresh-cw" aria-hidden="true"></i>
+        <span>New version available!</span>
+        <button id="update-button">Refresh</button>
+      </div>
+    </div>
+
     <script>
       // Register Service Worker for offline capabilities
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
           navigator.serviceWorker
-            .register("/service-worker.js")
+            .register("/service-worker.js", {
+              scope: "/",
+              // This tells the browser to bypass the HTTP cache for service worker
+              updateViaCache: "none",
+            })
             .then((registration) => {
               console.log(
                 "Service Worker registered with scope:",
                 registration.scope
               );
+
+              // Check for updates
+              registration.addEventListener("updatefound", () => {
+                const installingWorker = registration.installing;
+
+                installingWorker.addEventListener("statechange", () => {
+                  if (installingWorker.state === "installed") {
+                    if (navigator.serviceWorker.controller) {
+                      // New update available
+                      showUpdateToast();
+                    }
+                  }
+                });
+              });
+
+              // Handle controller change (when a new service worker takes over)
+              let refreshing = false;
+              navigator.serviceWorker.addEventListener(
+                "controllerchange",
+                () => {
+                  if (!refreshing) {
+                    refreshing = true;
+                    window.location.reload();
+                  }
+                }
+              );
             })
             .catch((error) => {
               console.error("Service Worker registration failed:", error);
             });
+
+          // Force check for service worker updates every time the page loads
+          navigator.serviceWorker.ready.then((registration) => {
+            registration.update();
+          });
         });
+      } // Show update notification toast
+      function showUpdateToast() {
+        const updateToast = document.getElementById("update-toast");
+        updateToast.style.display = "block";
+
+        // Allow DOM to update before adding the 'show' class for animation
+        setTimeout(() => {
+          updateToast.classList.add("show");
+        }, 10);
+
+        const updateButton = document.getElementById("update-button");
+        updateButton.addEventListener("click", () => {
+          if (navigator.serviceWorker.controller) {
+            navigator.serviceWorker.controller.postMessage({
+              type: "SKIP_WAITING",
+            });
+          }
+          window.location.reload();
+        });
+
+        // Announce to screen readers
+        const announcement = document.createElement("div");
+        announcement.setAttribute("role", "status");
+        announcement.setAttribute("aria-live", "polite");
+        announcement.className = "sr-only";
+        announcement.textContent =
+          "A new version of this app is available. Press the refresh button to update.";
+        document.body.appendChild(announcement);
+
+        // Remove the announcement after it's been read
+        setTimeout(() => {
+          if (announcement.parentNode) {
+            document.body.removeChild(announcement);
+          }
+        }, 5000);
+      } // PWA Installation
+      let deferredPrompt;
+      const installButton = document.getElementById("install-app");
+
+      // Check if PWA is already installed
+      function isPWAInstalled() {
+        // Check if running in standalone mode or if installed
+        return (
+          window.matchMedia("(display-mode: standalone)").matches ||
+          window.matchMedia("(display-mode: fullscreen)").matches ||
+          window.navigator.standalone === true
+        );
       }
+
+      // Configure install button
+      function setupInstallButton() {
+        // If already installed, hide the button
+        if (isPWAInstalled()) {
+          if (installButton) {
+            installButton.style.display = "none";
+          }
+          console.log("PWA is already installed");
+          return;
+        }
+
+        // Otherwise, hide by default until we get the beforeinstallprompt event
+        if (installButton) {
+          installButton.style.display = "none";
+
+          // Add click handler
+          installButton.addEventListener("click", async () => {
+            if (!deferredPrompt) {
+              console.log("Install prompt not available");
+              return;
+            }
+
+            // Hide the install button
+            installButton.style.display = "none";
+
+            // Log the attempt
+            console.log("Showing install prompt");
+
+            // Show the install prompt
+            deferredPrompt.prompt();
+
+            // Wait for the user to respond to the prompt
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log(`User response to install prompt: ${outcome}`);
+
+            // If the user declined, we can show the button again
+            if (outcome === "dismissed") {
+              setTimeout(() => {
+                installButton.style.display = "flex";
+              }, 2000);
+            }
+
+            // Clear the deferredPrompt variable
+            deferredPrompt = null;
+          });
+        }
+      }
+
+      // Initialize
+      setupInstallButton();
+
+      // Hide install button after timeout if no install prompt appears
+      // (likely means the app is already installed or can't be installed)
+      setTimeout(() => {
+        if (deferredPrompt === undefined && installButton) {
+          installButton.style.display = "none";
+        }
+      }, 3000);
+
+      // Listen for the beforeinstallprompt event
+      window.addEventListener("beforeinstallprompt", (e) => {
+        // Prevent Chrome from automatically showing the prompt
+        e.preventDefault();
+
+        // Only proceed if we're not already installed
+        if (isPWAInstalled()) {
+          return;
+        }
+
+        // Stash the event so it can be triggered later
+        deferredPrompt = e;
+
+        console.log("Install prompt available");
+
+        // Show the install button
+        if (installButton) {
+          installButton.style.display = "flex";
+        }
+      });
+
+      // Listen for successful installation
+      window.addEventListener("appinstalled", (event) => {
+        // Hide the install button
+        if (installButton) {
+          installButton.style.display = "none";
+        }
+
+        // Clear the deferredPrompt variable
+        deferredPrompt = null;
+
+        // Log the installation to analytics
+        console.log("PWA was installed successfully");
+
+        // You might want to show a success message or tutorial
+        // on first installation
+        localStorage.setItem("pwa_installed", "true");
+        localStorage.setItem("pwa_install_date", new Date().toISOString());
+      });
+
+      // Monitor display mode changes (helps detect when user installs or uninstalls)
+      window
+        .matchMedia("(display-mode: standalone)")
+        .addEventListener("change", (evt) => {
+          console.log(
+            `Display mode changed to: ${evt.matches ? "standalone" : "browser"}`
+          );
+          setupInstallButton();
+        });
 
       // Initialize Lucide icons
       document.addEventListener("DOMContentLoaded", function () {

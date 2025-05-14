@@ -438,6 +438,36 @@ body {
   gap: 0.5rem;
 }
 
+/* Install Button */
+.install-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: hsl(var(--accent-foreground));
+  background-color: hsl(var(--accent));
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.install-button:hover {
+  background-color: hsl(var(--accent) / 0.8);
+}
+
+.install-button:active {
+  transform: scale(0.98);
+}
+
+.install-button i {
+  width: 16px;
+  height: 16px;
+}
+
 /* Hero Section */
 .hero {
   padding: 3rem 0 4rem;
@@ -1635,3 +1665,68 @@ button:focus-visible {
   height: 16px; /* Match icon size */
   color: hsl(var(--primary)); /* Use primary color for the icon */
 }
+
+/* Update Toast */
+.update-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.update-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.update-toast-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+}
+
+.update-toast-content i {
+  color: hsl(var(--primary));
+  width: 18px;
+  height: 18px;
+}
+
+.update-toast-content span {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.update-toast-content button {
+  margin-left: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: hsl(var(--primary-foreground));
+  background-color: hsl(var(--primary));
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.update-toast-content button:hover {
+  background-color: hsl(var(--primary) / 0.9);
+}
+
+@media (max-width: 640px) {
+  .update-toast {
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+  }
+}
+
+/* Footer */
