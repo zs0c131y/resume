@@ -886,9 +886,17 @@
 
         console.log("Install prompt available");
 
-        // Show the install button
-        if (installButton) {
+        // Check if the device is mobile or tablet
+        const isMobileOrTablet =
+          /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+            navigator.userAgent.toLowerCase()
+          );
+
+        // Show the install button only on mobile/tablet
+        if (installButton && isMobileOrTablet) {
           installButton.style.display = "flex";
+        } else if (installButton) {
+          installButton.style.display = "none"; // Ensure it's hidden on other devices
         }
       });
 
