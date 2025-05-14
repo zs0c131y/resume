@@ -127,18 +127,6 @@
         </nav>
         <div class="header-right">
           <button
-            id="mobile-menu-toggle"
-            class="mobile-menu-toggle"
-            aria-label="Toggle mobile menu"
-            aria-expanded="false"
-          >
-            <div class="hamburger-icon">
-              <span class="hamburger-line"></span>
-              <span class="hamburger-line"></span>
-              <span class="hamburger-line"></span>
-            </div>
-          </button>
-          <button
             id="theme-toggle"
             class="theme-toggle"
             aria-label="Toggle dark/light mode"
@@ -156,15 +144,6 @@
             ></i>
           </button>
           <a href="#contact" class="contact-button">Get in touch</a>
-          <button
-            id="install-app"
-            class="install-button"
-            aria-label="Install app"
-            style="display: none"
-          >
-            <i data-lucide="download" aria-hidden="true"></i>
-            Install
-          </button>
         </div>
       </div>
     </header>
@@ -800,7 +779,6 @@
         }, 5000);
       } // PWA Installation
       let deferredPrompt;
-      const installButton = document.getElementById("install-app");
 
       // Check if PWA is already installed
       function isPWAInstalled() {
@@ -812,109 +790,31 @@
         );
       }
 
-      // Configure install button
-      function setupInstallButton() {
-        // If already installed, hide the button
-        if (isPWAInstalled()) {
-          if (installButton) {
-            installButton.style.display = "none";
-          }
-          console.log("PWA is already installed");
-          return;
-        }
-
-        // Otherwise, hide by default until we get the beforeinstallprompt event
-        if (installButton) {
-          installButton.style.display = "none";
-
-          // Add click handler
-          installButton.addEventListener("click", async () => {
-            if (!deferredPrompt) {
-              console.log("Install prompt not available");
-              return;
-            }
-
-            // Hide the install button
-            installButton.style.display = "none";
-
-            // Log the attempt
-            console.log("Showing install prompt");
-
-            // Show the install prompt
-            deferredPrompt.prompt();
-
-            // Wait for the user to respond to the prompt
-            const { outcome } = await deferredPrompt.userChoice;
-            console.log(`User response to install prompt: ${outcome}`);
-
-            // If the user declined, we can show the button again
-            if (outcome === "dismissed") {
-              setTimeout(() => {
-                installButton.style.display = "flex";
-              }, 2000);
-            }
-
-            // Clear the deferredPrompt variable
-            deferredPrompt = null;
-          });
-        }
-      }
-
-      // Initialize
-      setupInstallButton();
-
-      // Hide install button after timeout if no install prompt appears
-      // (likely means the app is already installed or can't be installed)
-      setTimeout(() => {
-        if (deferredPrompt === undefined && installButton) {
-          installButton.style.display = "none";
-        }
-      }, 3000);
-
       // Listen for the beforeinstallprompt event
       window.addEventListener("beforeinstallprompt", (e) => {
-        // Prevent Chrome from automatically showing the prompt
-        e.preventDefault();
+        // DO NOT call e.preventDefault(); to allow browser to show its own prompt
 
         // Only proceed if we're not already installed
         if (isPWAInstalled()) {
+          console.log(
+            "PWA already installed, not stashing beforeinstallprompt event."
+          );
           return;
         }
 
-        // Stash the event so it can be triggered later
+        // Stash the event so it can be triggered later if needed by the browser or other UI
         deferredPrompt = e;
-
-        console.log("Install prompt available");
-
-        // Check if the device is mobile or tablet
-        const isMobileOrTablet =
-          /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
-            navigator.userAgent.toLowerCase()
-          );
-
-        // Show the install button only on mobile/tablet
-        if (installButton && isMobileOrTablet) {
-          installButton.style.display = "flex";
-        } else if (installButton) {
-          installButton.style.display = "none"; // Ensure it's hidden on other devices
-        }
+        console.log(
+          "beforeinstallprompt event fired and stashed. Browser may show its own install promotion."
+        );
       });
 
       // Listen for successful installation
       window.addEventListener("appinstalled", (event) => {
-        // Hide the install button
-        if (installButton) {
-          installButton.style.display = "none";
-        }
-
         // Clear the deferredPrompt variable
         deferredPrompt = null;
-
         // Log the installation to analytics
-        console.log("PWA was installed successfully");
-
-        // You might want to show a success message or tutorial
-        // on first installation
+        console.log("PWA was installed successfully via browser prompt.");
         localStorage.setItem("pwa_installed", "true");
         localStorage.setItem("pwa_install_date", new Date().toISOString());
       });
@@ -926,7 +826,6 @@
           console.log(
             `Display mode changed to: ${evt.matches ? "standalone" : "browser"}`
           );
-          setupInstallButton();
         });
 
       // Initialize Lucide icons
