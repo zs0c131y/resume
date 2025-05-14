@@ -1729,4 +1729,11 @@ button:focus-visible {
   }
 }
 
+/* Hide contact button on mobile */
+@media (max-width: 768px) {
+  .header-right .contact-button {
+    display: none;
+  }
+}
+
 /* Footer */
