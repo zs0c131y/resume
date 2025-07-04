@@ -9,9 +9,9 @@
   --primary: 348 83% 47%;
   --primary-foreground: 210 40% 98%;
   --secondary: 240 4.8% 95.9%;
-  --secondary-foreground: 240 5.9% 8%;
+  --secondary-foreground: 240 5.9% 8%; /* Increased contrast from 10% to 8% */
   --muted: 240 4.8% 95.9%;
-  --muted-foreground: 240 3.8% 40%;
+  --muted-foreground: 240 3.8% 40%; /* Increased contrast from 46.1% to 40% */
   --accent: 240 4.8% 95.9%;
   --accent-foreground: 240 5.9% 10%;
   --destructive: 0 84.2% 60.2%;
@@ -33,9 +33,9 @@ body:not(.dark) {
   --primary: 348 83% 47%;
   --primary-foreground: 210 40% 98%;
   --secondary: 240 4.8% 95.9%;
-  --secondary-foreground: 240 5.9% 8%;
+  --secondary-foreground: 240 5.9% 8%; /* Increased contrast from 10% to 8% */
   --muted: 240 4.8% 95.9%;
-  --muted-foreground: 240 3.8% 40%;
+  --muted-foreground: 240 3.8% 40%; /* Increased contrast from 46.1% to 40% */
   --accent: 240 4.8% 95.9%;
   --accent-foreground: 240 5.9% 10%;
   --destructive: 0 84.2% 60.2%;
@@ -138,29 +138,6 @@ body:not(.dark) .contact-link:hover {
   color: hsl(var(--foreground));
 }
 
-/* Updated styles for about buttons in light mode */
-body:not(.dark) .resume-button,
-body:not(.dark) .blog-button {
-  border: 2px solid hsl(var(--border));
-  color: hsl(var(--foreground));
-  background-color: transparent;
-  transition: all 0.2s ease;
-}
-
-body:not(.dark) .resume-button:hover,
-body:not(.dark) .blog-button:hover {
-  border-color: hsl(var(--primary));
-  color: hsl(var(--primary));
-  background-color: hsla(var(--primary) / 0.08);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-body:not(.dark) .resume-button:active,
-body:not(.dark) .blog-button:active {
-  transform: translateY(0);
-}
-
 /* Add hover effects for about section buttons in light mode */
 body:not(.dark) .about-buttons .button {
   position: relative;
@@ -206,19 +183,19 @@ body:not(.dark) .about-buttons .button:active {
   --card-foreground: 0 0% 98%;
   --popover: 240 10% 3.9%;
   --popover-foreground: 0 0% 98%;
-  --primary: 0 100% 70%;
+  --primary: 0 100% 70%; /* Improved contrast from 65% to 70% */
   --primary-foreground: 210 40% 98%;
   --secondary: 240 3.7% 15.9%;
   --secondary-foreground: 0 0% 98%;
   --muted: 240 3.7% 15.9%;
-  --muted-foreground: 240 5% 70%;
+  --muted-foreground: 240 5% 70%; /* Improved contrast from 64.9% to 70% */
   --accent: 240 3.7% 15.9%;
   --accent-foreground: 0 0% 98%;
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
   --border: 240 3.7% 15.9%;
   --input: 240 3.7% 15.9%;
-  --ring: 0 100% 70%;
+  --ring: 0 100% 70%; /* Improved contrast from 65% to 70% */
 }
 
 * {
@@ -300,7 +277,7 @@ body {
   gap: 1.5rem;
 }
 
-/* Theme toggle styles */
+/* Theme toggle styles - FIXED */
 .theme-toggle {
   display: inline-flex;
   align-items: center;
@@ -314,7 +291,7 @@ body {
   cursor: pointer;
   transition: all 0.2s ease;
   margin-right: 0.5rem;
-  outline: none;
+  outline: none; /* Remove default outline */
 }
 
 .theme-toggle:hover {
@@ -322,7 +299,7 @@ body {
   color: hsl(var(--accent-foreground));
 }
 
-/* Focus styles for buttons */
+/* Focus styles for buttons - FIXED */
 .theme-toggle:focus,
 .contact-button:focus,
 .button:focus {
@@ -331,7 +308,7 @@ body {
     0 0 0 4px hsla(var(--primary) / 0.7);
 }
 
-/* Remove focus styles after click */
+/* Remove focus styles after click - FIXED */
 .theme-toggle:focus:not(:focus-visible),
 .contact-button:focus:not(:focus-visible),
 .button:focus:not(:focus-visible) {
@@ -438,36 +415,6 @@ body {
   gap: 0.5rem;
 }
 
-/* Install Button */
-.install-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: hsl(var(--accent-foreground));
-  background-color: hsl(var(--accent));
-  border: none;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
-}
-
-.install-button:hover {
-  background-color: hsl(var(--accent) / 0.8);
-}
-
-.install-button:active {
-  transform: scale(0.98);
-}
-
-.install-button i {
-  width: 16px;
-  height: 16px;
-}
-
 /* Hero Section */
 .hero {
   padding: 3rem 0 4rem;
@@ -516,7 +463,7 @@ body {
   font-size: 0.875rem;
   color: white;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-  font-weight: 500;
+  font-weight: 500; /* Added for better readability */
 }
 
 .badge i {
@@ -775,9 +722,9 @@ body {
 
 .project-card img[src*="blossoms.png"] {
   width: 100%;
-  object-fit: contain;
-  background-color: #000;
-  aspect-ratio: auto;
+  object-fit: contain; /* This ensures the whole image is visible without cropping */
+  background-color: #000; /* Black background to match the space theme */
+  aspect-ratio: auto; /* Override the default aspect ratio */
 }
 
 .project-content {
@@ -911,7 +858,7 @@ body {
 /* Utilities */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  scroll-padding-top: 80px; /* Adds padding to account for the sticky header */
 }
 
 /* Section spacing */
@@ -934,304 +881,6 @@ html {
 @media (max-width: 767px) {
   .container {
     padding: 0 1rem;
-  }
-}
-
-/* Mobile Navigation Menu */
-.mobile-menu-toggle {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: transparent;
-  border: none;
-  color: hsl(var(--foreground));
-  cursor: pointer;
-  transition: all 0.2s ease;
-  position: relative;
-  z-index: 100;
-  outline: none;
-  margin-right: 0;
-  margin-left: 0;
-}
-
-.mobile-menu-toggle:hover {
-  background-color: hsl(var(--accent));
-}
-
-/* Container for the hamburger lines */
-.hamburger-icon {
-  position: relative;
-  width: 18px;
-  height: 14px;
-}
-
-/* Individual hamburger lines */
-.hamburger-line {
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background-color: hsl(var(--foreground));
-  transition: all 0.3s ease;
-  border-radius: 2px;
-  left: 0;
-}
-
-/* Position each line */
-.hamburger-line:nth-child(1) {
-  top: 0;
-}
-
-.hamburger-line:nth-child(2) {
-  top: 6px;
-}
-
-.hamburger-line:nth-child(3) {
-  top: 12px;
-}
-
-@media (max-width: 767px) {
-  .mobile-menu-toggle {
-    display: flex !important;
-  }
-
-  .header-container {
-    position: relative;
-  }
-
-  /* Ensure the main navigation is properly styled */
-  .main-nav {
-    display: flex !important;
-    flex-direction: column;
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 70%;
-    height: 100vh;
-    background-color: hsl(var(--background));
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-    transition: right 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
-    padding: 80px 2rem 2rem;
-    z-index: 90;
-    opacity: 0;
-    visibility: hidden;
-  }
-
-  .main-nav.open {
-    right: 0;
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .main-nav a {
-    padding: 1rem 0;
-    font-size: 1.25rem;
-    border-bottom: 1px solid hsl(var(--border));
-  }
-
-  /* Animated menu toggle when open */
-  .mobile-menu-toggle.open {
-    background-color: hsla(var(--primary), 0.1);
-    border-color: hsla(var(--primary), 0.3);
-  }
-
-  .mobile-menu-toggle.open .hamburger-line {
-    background-color: hsl(var(--primary));
-  }
-
-  .mobile-menu-toggle.open .hamburger-line:nth-child(1) {
-    transform: translateY(6px) rotate(45deg);
-  }
-
-  .mobile-menu-toggle.open .hamburger-line:nth-child(2) {
-    opacity: 0;
-  }
-
-  .mobile-menu-toggle.open .hamburger-line:nth-child(3) {
-    transform: translateY(-6px) rotate(-45deg);
-  }
-
-  /* Overlay when menu is open */
-  .menu-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 10;
-    transition: opacity 0.3s;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  .menu-overlay.open {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-  }
-
-  /* Adjust header right on mobile */
-  .header-right {
-    margin-left: auto;
-  }
-}
-
-/* Loading animations and states */
-.loading-fade-in {
-  animation: fadein 1s ease-in-out;
-}
-
-@keyframes fadein {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Staggered loading animation for items in grids */
-.skill-icon,
-.project-card,
-.badge {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.skill-icon.loaded,
-.project-card.loaded,
-.badge.loaded {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Skeleton screens while content loads */
-.skeleton {
-  background-color: hsl(var(--muted));
-  background-image: linear-gradient(
-    90deg,
-    hsla(var(--muted), 0.1) 0%,
-    hsla(var(--muted), 0.5) 50%,
-    hsla(var(--muted), 0.1) 100%
-  );
-  background-size: 200% 100%;
-  animation: skeleton-loading 1.5s infinite;
-  border-radius: var(--radius);
-}
-
-@keyframes skeleton-loading {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
-
-/* Page transition */
-body {
-  opacity: 0;
-  animation: bodyFadeIn 0.5s ease-in forwards;
-}
-
-@keyframes bodyFadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-/* Loading spinner for delayed content */
-.loading-spinner {
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  border: 3px solid hsla(var(--primary), 0.3);
-  border-radius: 50%;
-  border-top-color: hsl(var(--primary));
-  animation: spin 1s ease-in-out infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Page loading indicator */
-.page-loading {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: hsl(var(--primary));
-  z-index: 9999;
-  transform-origin: left;
-  transform: scaleX(0);
-  animation: pageLoadingBar 2s ease-in-out forwards;
-  transition: opacity 0.3s ease;
-}
-
-@keyframes pageLoadingBar {
-  0% {
-    transform: scaleX(0);
-  }
-  50% {
-    transform: scaleX(0.5);
-  }
-  100% {
-    transform: scaleX(1);
-  }
-}
-
-/* Media query for reduced motion preference */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-
-  .page-loading,
-  .loading-spinner,
-  .skeleton {
-    animation: none !important;
-  }
-
-  .skill-icon,
-  .project-card,
-  .badge {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* Override for mobile menu toggle button focus */
-.mobile-menu-toggle:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px hsl(var(--background)),
-    0 0 0 4px hsla(var(--primary) / 0.7);
-}
-
-.mobile-menu-toggle:focus:not(:focus-visible) {
-  box-shadow: none;
-}
-
-/* Fix for theme toggle button in Safari */
-@supports (-webkit-touch-callout: none) {
-  .theme-toggle,
-  .mobile-menu-toggle {
-    -webkit-tap-highlight-color: transparent;
   }
 }
 
@@ -1533,8 +1182,307 @@ body {
   font-size: 0.875rem;
 }
 
+/* Mobile Navigation Menu */
+.mobile-menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+  color: hsl(var(--foreground));
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 100;
+  outline: none;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.mobile-menu-toggle:hover {
+  background-color: hsl(var(--accent));
+}
+
+/* Container for the hamburger lines */
+.hamburger-icon {
+  position: relative;
+  width: 18px;
+  height: 14px;
+}
+
+/* Individual hamburger lines */
+.hamburger-line {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: hsl(var(--foreground));
+  transition: all 0.3s ease;
+  border-radius: 2px;
+  left: 0;
+}
+
+/* Position each line */
+.hamburger-line:nth-child(1) {
+  top: 0;
+}
+
+.hamburger-line:nth-child(2) {
+  top: 6px;
+}
+
+.hamburger-line:nth-child(3) {
+  top: 12px;
+}
+
+@media (max-width: 767px) {
+  .mobile-menu-toggle {
+    display: flex !important;
+  }
+
+  .header-container {
+    position: relative;
+  }
+
+  /* Ensure the main navigation is properly styled */
+  .main-nav {
+    display: flex !important;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    background-color: hsl(var(--background));
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+    padding: 80px 2rem 2rem;
+    z-index: 90;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .main-nav.open {
+    right: 0;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .main-nav a {
+    padding: 1rem 0;
+    font-size: 1.25rem;
+    border-bottom: 1px solid hsl(var(--border));
+  }
+
+  /* Animated menu toggle when open */
+  .mobile-menu-toggle.open {
+    background-color: hsla(var(--primary), 0.1);
+    border-color: hsla(var(--primary), 0.3);
+  }
+
+  .mobile-menu-toggle.open .hamburger-line {
+    background-color: hsl(var(--primary));
+  }
+
+  .mobile-menu-toggle.open .hamburger-line:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .mobile-menu-toggle.open .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-menu-toggle.open .hamburger-line:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* Overlay when menu is open */
+  .menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10; /* Ensure it's below the nav menu */
+    transition: opacity 0.3s;
+    opacity: 0;
+    visibility: hidden; /* Make it invisible when not active */
+    pointer-events: none; /* Prevent interactions when not active */
+  }
+
+  .menu-overlay.open {
+    opacity: 1;
+    visibility: visible; /* Allow visibility when the menu is active */
+    pointer-events: auto; /* Enable interactions when menu is open */
+  }
+
+  /* Adjust header right on mobile */
+  .header-right {
+    margin-left: auto;
+  }
+}
+
+/* Loading animations and states */
+.loading-fade-in {
+  animation: fadein 1s ease-in-out;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Staggered loading animation for items in grids */
+.skill-icon,
+.project-card,
+.badge {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.skill-icon.loaded,
+.project-card.loaded,
+.badge.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Skeleton screens while content loads */
+.skeleton {
+  background-color: hsl(var(--muted));
+  background-image: linear-gradient(
+    90deg,
+    hsla(var(--muted), 0.1) 0%,
+    hsla(var(--muted), 0.5) 50%,
+    hsla(var(--muted), 0.1) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: var(--radius);
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Page transition */
+body {
+  opacity: 0;
+  animation: bodyFadeIn 0.5s ease-in forwards;
+}
+
+@keyframes bodyFadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Loading spinner for delayed content */
+.loading-spinner {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid hsla(var(--primary), 0.3);
+  border-radius: 50%;
+  border-top-color: hsl(var(--primary));
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Page loading indicator */
+.page-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: hsl(var(--primary));
+  z-index: 9999;
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: pageLoadingBar 2s ease-in-out forwards;
+  transition: opacity 0.3s ease; /* Add transition for smooth fade out */
+}
+
+@keyframes pageLoadingBar {
+  0% {
+    transform: scaleX(0);
+  }
+  50% {
+    transform: scaleX(0.5);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+/* Media query for reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .page-loading,
+  .loading-spinner,
+  .skeleton {
+    animation: none !important;
+  }
+
+  .skill-icon,
+  .project-card,
+  .badge {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Override for mobile menu toggle button focus - FIXED */
+.mobile-menu-toggle:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--background)),
+    0 0 0 4px hsla(var(--primary) / 0.7);
+}
+
+.mobile-menu-toggle:focus:not(:focus-visible) {
+  box-shadow: none;
+}
+
+/* Fix for theme toggle button in Safari */
+@supports (-webkit-touch-callout: none) {
+  .theme-toggle,
+  .mobile-menu-toggle {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
 /* Global focus style reset */
 :focus {
+  /* Remove default outline for all elements when focused */
   outline: none !important;
 }
 
@@ -1551,13 +1499,16 @@ body {
 }
 
 .main-nav a:focus::after {
+  /* Prevent the underline animation on mouse click */
   width: 0 !important;
 }
 
 .main-nav a:focus:active::after {
+  /* Keep the current width on active click state */
   width: 0 !important;
 }
 
+/* Only show underline and highlight when keyboard navigating */
 .main-nav a:focus-visible {
   color: hsl(var(--primary)) !important;
   text-decoration: underline !important;
@@ -1569,6 +1520,7 @@ body {
   width: 100% !important;
 }
 
+/* Active state should always show the underline */
 .main-nav a.active::after {
   width: 100% !important;
 }
@@ -1621,6 +1573,7 @@ button:focus-visible {
   outline-offset: 2px !important;
 }
 
+/* Project links and other specific elements */
 .project-link:focus-visible {
   color: hsl(var(--primary)) !important;
 }
@@ -1640,100 +1593,12 @@ button:focus-visible {
   width: 0 !important;
 }
 
+/* When using keyboard navigation */
 .user-is-tabbing .main-nav a:focus::after {
   width: 100% !important;
 }
 
+/* Fix for iOS touch highlight */
 * {
   -webkit-tap-highlight-color: transparent;
 }
-
-/* Style for the 'You are here!' indicator */
-.current-site-indicator {
-  display: inline-flex; /* Use flexbox for alignment */
-  align-items: center; /* Vertically align items in the middle */
-  gap: 0.5rem; /* Add space between icon and text, same as project-link */
-  color: hsl(
-    var(--muted-foreground)
-  ); /* Match text color with other links/text */
-  font-weight: 500; /* Match font weight with project-link */
-  padding: 0.25rem; /* Match padding with project-link */
-}
-
-.current-site-indicator i {
-  width: 16px; /* Match icon size */
-  height: 16px; /* Match icon size */
-  color: hsl(var(--primary)); /* Use primary color for the icon */
-}
-
-/* Update Toast */
-.update-toast {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: hsl(var(--background));
-  border: 1px solid hsl(var(--border));
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
-  transform: translateY(100px);
-  opacity: 0;
-  transition: transform 0.3s, opacity 0.3s;
-}
-
-.update-toast.show {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.update-toast-content {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-}
-
-.update-toast-content i {
-  color: hsl(var(--primary));
-  width: 18px;
-  height: 18px;
-}
-
-.update-toast-content span {
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.update-toast-content button {
-  margin-left: 0.5rem;
-  padding: 0.375rem 0.75rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: hsl(var(--primary-foreground));
-  background-color: hsl(var(--primary));
-  border: none;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.update-toast-content button:hover {
-  background-color: hsl(var(--primary) / 0.9);
-}
-
-@media (max-width: 640px) {
-  .update-toast {
-    left: 20px;
-    right: 20px;
-    bottom: 20px;
-  }
-}
-
-/* Hide contact button on mobile */
-@media (max-width: 768px) {
-  .header-right .contact-button {
-    display: none;
-  }
-}
-
-/* Footer */
